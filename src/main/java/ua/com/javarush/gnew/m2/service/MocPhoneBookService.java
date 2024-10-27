@@ -12,16 +12,16 @@ import java.util.stream.Collectors;
 public class MocPhoneBookService implements PhoneBookInterface{
 
     private List<Contact> phoneBook =new ArrayList<>(){{
-        add(new Contact("Chris Hemsworth",
+        add(new Contact("12340","Chris Hemsworth",
                 new String[]{"+380671111111","+380672222222"},
                 new String[]{"chris.h@m.ua","chris.h@gmail.com"}));
-        add(new Contact("Chris Pratt",
+        add(new Contact("12341","Chris Pratt",
                 new String[]{"+380673333333","+380674444444"},
                 new String[]{"chris.p@m.ua","chris.p@gmail.com"}));
-        add(new Contact("Scarlett Johansson",
+        add(new Contact("12342","Scarlett Johansson",
                 new String[]{"+380675555555","+380676666666"},
                 new String[]{"Scarlett.j@m.ua","Scarlett.j@gmail.com"}));
-        add(new Contact("2222","Jeremy Renner",
+        add(new Contact("12343","Jeremy Renner",
                 new String[]{"+380677777777","+380678888888"},
                 new String[]{"Jeremy.r@m.ua","Jeremy.r@gmail.com"}));
     }};
@@ -46,8 +46,11 @@ public class MocPhoneBookService implements PhoneBookInterface{
     }
 
     @Override
-    public void delete(String name) {
-
+    public void delete(String id) {
+        phoneBook.stream()
+                .filter(c->c.getId().equals(id))
+                .findFirst()
+                .ifPresent((c)->phoneBook.remove(c));
     }
 
     @Override

@@ -7,7 +7,7 @@ import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello 1-clear-concept-of-a-cli!");
+        System.out.println("Hello dRaider-concept-cli!");
 
         /**
          * PhoneBook Picocli Cli Example

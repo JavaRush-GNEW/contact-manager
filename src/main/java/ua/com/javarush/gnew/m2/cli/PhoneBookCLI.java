@@ -23,7 +23,7 @@ public class PhoneBookCLI implements Callable<Integer> {
         return 0;
     }
 
-    @Command(name = "--add", aliases = {"-a"}, description = "Додає новий контакт до телефонної книги", mixinStandardHelpOptions = true)
+    @Command(name = "add", aliases = {"-a","--add"}, description = "Додає новий контакт до телефонної книги", mixinStandardHelpOptions = true)
     public static class AddContact implements Callable<Integer> {
 
         private final PhoneBookInterface phoneBookInterface;
@@ -49,7 +49,7 @@ public class PhoneBookCLI implements Callable<Integer> {
         }
     }
 
-    @Command(name = "--search", aliases = {"-s"}, mixinStandardHelpOptions = true, description = "Шукає контакт за ім'ям")
+    @Command(name = "search", aliases = {"-s","--search"}, mixinStandardHelpOptions = true, description = "Шукає контакт за ім'ям")
     public static class SearchContact implements Callable<Integer> {
 
         private final PhoneBookInterface phoneBookInterface;
@@ -68,7 +68,7 @@ public class PhoneBookCLI implements Callable<Integer> {
         }
     }
 
-    @Command(name = "--edit", aliases = {"-e"}, description = "Редагує існуючий контакт за ім'ям")
+    @Command(name = "--edit", aliases = {"-e","--edit"}, description = "Редагує існуючий контакт за ім'ям")
     public static class EditContact implements Callable<Integer> {
         private final PhoneBookInterface phoneBookInterface;
         Scanner scanner = new Scanner(System.in);
@@ -76,14 +76,6 @@ public class PhoneBookCLI implements Callable<Integer> {
 
         @Parameters(index = "0", description = "ID контакта", arity = "1")
         private String id;
-//        @Option(names = {"-n", "--name"}, description = "Ім'я контакту", required = true)
-//        private String name;
-//
-//        @Option(names = {"-p", "--phone"}, description = "Новий номер телефону", required = false,arity = "0..1")
-//        private String[] newPhone;
-//
-//        @Option(names = {"-e", "--email"}, description = "Електронна пошта", required = false,arity = "0..1")
-//        private String[] emails;
 
         public EditContact(PhoneBookInterface phoneBookInterface) {
             this.phoneBookInterface = phoneBookInterface;
@@ -114,13 +106,16 @@ public class PhoneBookCLI implements Callable<Integer> {
         }
     }
 
-    @Command(name = "--delete", aliases = {"-d", "--delete"}, description = "Видаляє контакт за ім'ям", mixinStandardHelpOptions = true)
+    @Command(name = "--delete", aliases = {"-d", "--delete"}, description = "Видаляє контакт за ID", mixinStandardHelpOptions = true)
     public static class DeleteContact implements Callable<Integer> {
 
         private final PhoneBookInterface phoneBookInterface;
 
-        @Option(names = {"-n", "--name"}, description = "Ім'я для видалення", required = true)
-        private String name;
+//        @Option(names = {"-n", "--name"}, description = "Ім'я для видалення", required = true)
+//        private String name;
+
+        @Parameters(index = "0", description = "ID контакта", arity = "1..*")
+        private List<String> listId;
 
         public DeleteContact(PhoneBookInterface phoneBookInterface) {
             this.phoneBookInterface = phoneBookInterface;
@@ -128,8 +123,11 @@ public class PhoneBookCLI implements Callable<Integer> {
 
         @Override
         public Integer call() {
-            phoneBookInterface.delete(name);
-            System.out.println("Контакт видалено: " + name);
+            listId.forEach(id->{
+                phoneBookInterface.delete(id);
+            });
+            System.out.println("Контакт видалено: ");
+            Utils.printContactList(phoneBookInterface.list());
             return 0;
         }
     }

@@ -10,7 +10,7 @@ public interface PhoneBookInterface {
     void add(Contact contact);
     List<Contact> search(String str);
     void edit(Contact contact);
-    void delete(String name);
+    void delete(String id);
     List<Contact> list ();
     Optional<Contact> getById(String id);
 }
