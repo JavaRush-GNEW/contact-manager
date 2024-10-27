@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ua.com.javarush.gnew.m2.entity.Contact</OriginalElement>
+  <nodes>
+    <node x="1236.8685086551268" y="211.5">ua.com.javarush.gnew.m2.service.PhoneBookInterface</node>
+    <node x="1098.7789613848206" y="772.2669773635153">ua.com.javarush.gnew.m2.cli.PhoneBookCLI.DeleteContact</node>
+    <node x="742.3255659121174" y="211.5">ua.com.javarush.gnew.m2.service.MocPhoneBookService</node>
+    <node x="595.2490013315582" y="772.2669773635153">ua.com.javarush.gnew.m2.cli.PhoneBookCLI.SearchContact</node>
+    <node x="114.0" y="211.5">ua.com.javarush.gnew.m2.entity.Contact</node>
+    <node x="853.0139813581894" y="772.2669773635153">ua.com.javarush.gnew.m2.cli.PhoneBookCLI.ListContacts</node>
+    <node x="349.99900133155825" y="772.2669773635153">ua.com.javarush.gnew.m2.cli.PhoneBookCLI.AddContact</node>
+    <node x="1354.5439414114517" y="772.2669773635153">ua.com.javarush.gnew.m2.cli.PhoneBookCLI.EditContact</node>
+    <node x="1306.5439414114517" y="933.4587217043942">ua.com.javarush.gnew.m2.cli.EditContactMenu</node>
+    <node x="519.4960053262317" y="498.87150466045273">ua.com.javarush.gnew.m2.cli.PhoneBookCLI</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ua.com.javarush.gnew.m2.cli.EditContactMenu" target="ua.com.javarush.gnew.m2.entity.Contact" relationship="TO_ONE">
+      <point x="0.0" y="-38.5" />
+      <point x="1445.0439414114517" y="1005.9334221038615" />
+      <point x="279.7256990679095" y="1005.9334221038615" />
+      <point x="279.7256990679095" y="443.5" />
+      <point x="65.0" y="116.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.EditContact" target="ua.com.javarush.gnew.m2.cli.PhoneBookCLI" relationship="INNER_CLASS">
+      <point x="76.33333333333334" y="-38.5" />
+      <point x="1545.377274744785" y="709.7949400798934" />
+      <point x="592.9960053262317" y="709.7949400798934" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.EditContact" target="ua.com.javarush.gnew.m2.service.PhoneBookInterface" relationship="TO_ONE">
+      <point x="0.0" y="-38.5" />
+      <point x="1469.0439414114517" y="751.0309587217043" />
+      <point x="1413.1185086551268" y="751.0309587217043" />
+      <point x="58.75" y="82.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.service.MocPhoneBookService" target="ua.com.javarush.gnew.m2.service.PhoneBookInterface" relationship="REALIZATION">
+      <point x="-78.33333333333334" y="-93.5" />
+      <point x="781.4922325787841" y="224.4950066577897" />
+      <point x="1295.6185086551268" y="224.4950066577897" />
+      <point x="-58.75" y="82.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.service.MocPhoneBookService" target="ua.com.javarush.gnew.m2.entity.Contact" relationship="TO_MANY">
+      <point x="78.33333333333334" y="-93.5" />
+      <point x="938.1588992454508" y="230.3541944074567" />
+      <point x="309.0" y="230.3541944074567" />
+      <point x="65.0" y="116.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.AddContact" target="ua.com.javarush.gnew.m2.service.PhoneBookInterface" relationship="TO_ONE">
+      <point x="0.0" y="-38.5" />
+      <point x="465.49900133155825" y="729.7949400798934" />
+      <point x="1413.1185086551268" y="729.7949400798934" />
+      <point x="58.75" y="82.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.EditContactMenu" target="ua.com.javarush.gnew.m2.service.PhoneBookInterface" relationship="TO_ONE">
+      <point x="0.0" y="-38.5" />
+      <point x="1445.0439414114517" y="949.7949400798934" />
+      <point x="1618.4407456724366" y="949.7949400798934" />
+      <point x="1618.4407456724366" y="729.7949400798934" />
+      <point x="1413.1185086551268" y="729.7949400798934" />
+      <point x="58.75" y="82.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.EditContact" target="ua.com.javarush.gnew.m2.cli.EditContactMenu" relationship="CREATE">
+      <point x="-76.33333333333334" y="-38.5" />
+      <point x="1392.7106080781184" y="889.4154460719042" />
+      <point x="1445.0439414114517" y="889.4154460719042" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.SearchContact" target="ua.com.javarush.gnew.m2.cli.PhoneBookCLI" relationship="INNER_CLASS">
+      <point x="61.0" y="-38.5" />
+      <point x="778.2490013315582" y="672.3215712383488" />
+      <point x="592.9960053262317" y="672.3215712383488" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.ListContacts" target="ua.com.javarush.gnew.m2.cli.PhoneBookCLI" relationship="INNER_CLASS">
+      <point x="58.0" y="-38.5" />
+      <point x="1027.0139813581895" y="709.7949400798934" />
+      <point x="592.9960053262317" y="709.7949400798934" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.SearchContact" target="ua.com.javarush.gnew.m2.service.PhoneBookInterface" relationship="TO_ONE">
+      <point x="-61.0" y="-38.5" />
+      <point x="656.2490013315582" y="729.7949400798934" />
+      <point x="1413.1185086551268" y="729.7949400798934" />
+      <point x="58.75" y="82.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.DeleteContact" target="ua.com.javarush.gnew.m2.service.PhoneBookInterface" relationship="TO_ONE">
+      <point x="-60.5" y="-38.5" />
+      <point x="1159.2789613848206" y="729.7949400798934" />
+      <point x="1413.1185086551268" y="729.7949400798934" />
+      <point x="58.75" y="82.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.DeleteContact" target="ua.com.javarush.gnew.m2.cli.PhoneBookCLI" relationship="INNER_CLASS">
+      <point x="60.5" y="-38.5" />
+      <point x="1280.2789613848206" y="709.7949400798934" />
+      <point x="592.9960053262317" y="709.7949400798934" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.ListContacts" target="ua.com.javarush.gnew.m2.service.PhoneBookInterface" relationship="TO_ONE">
+      <point x="-58.0" y="-38.5" />
+      <point x="911.0139813581894" y="729.7949400798934" />
+      <point x="1413.1185086551268" y="729.7949400798934" />
+      <point x="58.75" y="82.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.AddContact" target="ua.com.javarush.gnew.m2.cli.PhoneBookCLI" relationship="INNER_CLASS">
+      <point x="77.0" y="-38.5" />
+      <point x="542.4990013315582" y="709.7949400798934" />
+      <point x="592.9960053262317" y="709.7949400798934" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.service.MocPhoneBookService" target="ua.com.javarush.gnew.m2.entity.Contact" relationship="CREATE">
+      <point x="0.0" y="-93.5" />
+      <point x="859.8255659121174" y="327.5" />
+      <point x="179.0" y="327.5" />
+      <point x="-65.0" y="116.0" />
+    </edge>
+    <edge source="ua.com.javarush.gnew.m2.cli.PhoneBookCLI.AddContact" target="ua.com.javarush.gnew.m2.entity.Contact" relationship="CREATE">
+      <point x="-77.0" y="-38.5" />
+      <point x="388.49900133155825" y="709.7949400798934" />
+      <point x="179.0" y="709.7949400798934" />
+      <point x="-65.0" y="116.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.8582857142857143" showDependencies="true" x="819.8315579227697" y="638.4906790945405" />
+  <SelectedNodes>
+    <node>ua.com.javarush.gnew.m2.cli.PhoneBookCLI.AddContact</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
