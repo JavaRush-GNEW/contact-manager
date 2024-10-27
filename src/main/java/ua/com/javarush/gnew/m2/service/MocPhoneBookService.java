@@ -4,14 +4,13 @@ import ua.com.javarush.gnew.m2.entity.Contact;
 import ua.com.javarush.gnew.m2.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MocPhoneBookService implements PhoneBookInterface{
 
-    private List<Contact> phoneBook =new ArrayList<>(){{
+   final private List<Contact> phoneBook =new ArrayList<>(){{
         add(new Contact("12340","Chris Hemsworth",
                 new String[]{"+380671111111","+380672222222"},
                 new String[]{"chris.h@m.ua","chris.h@gmail.com"}));

@@ -123,9 +123,7 @@ public class PhoneBookCLI implements Callable<Integer> {
 
         @Override
         public Integer call() {
-            listId.forEach(id->{
-                phoneBookInterface.delete(id);
-            });
+            listId.forEach(id-> phoneBookInterface.delete(id));
             System.out.println("Контакт видалено: ");
             Utils.printContactList(phoneBookInterface.list());
             return 0;
