@@ -4,7 +4,6 @@ import picocli.CommandLine;
 import ua.com.javarush.gnew.m2.cli.PhoneBookCLI;
 import ua.com.javarush.gnew.m2.config.PhoneBookContext;
 import ua.com.javarush.gnew.m2.config.SimplePhoneBookContext;
-import ua.com.javarush.gnew.m2.service.MocPhoneBookService;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 
 public class Main {

@@ -19,8 +19,8 @@ import java.io.IOException;
 
 public class MocPhoneBookService implements PhoneBookInterface {
 
-    private PhoneBookContext  context;
-    private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);;
+    private final PhoneBookContext  context;
+    private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     final private List<Contact> phoneBook = new ArrayList<>();
 //        {{
@@ -70,10 +70,10 @@ public class MocPhoneBookService implements PhoneBookInterface {
 
     @Override
     public void edit(Contact contact) {
-    phoneBook.stream()
-                .filter(c->c.getId().equals(contact.getId()))
-                .findFirst()
-               .ifPresent(c->c=contact);
+//    phoneBook.stream()
+//                .filter(c->c.getId().equals(contact.getId()))
+//                .findFirst()
+//               .ifPresent(c->c=contact);
         try {
             saveContactsToFile(phoneBook, context.getUser()+"phonebook.book");
         } catch (IOException e) {
@@ -88,7 +88,7 @@ public class MocPhoneBookService implements PhoneBookInterface {
         phoneBook.stream()
                 .filter(c -> c.getId().equals(id))
                 .findFirst()
-                .ifPresent((c) -> phoneBook.remove(c));
+                .ifPresent(phoneBook::remove);
         try {
             saveContactsToFile(phoneBook, context.getUser()+"phonebook.book");
         } catch (IOException e) {
@@ -114,6 +114,7 @@ public class MocPhoneBookService implements PhoneBookInterface {
         objectMapper.writeValue(new File(filename), contacts);
     }
     public List<SimpleContact> loadContactsFromFile(String filename) throws IOException {
-        return objectMapper.readValue(new File(filename), new TypeReference<List<SimpleContact>>() {});
+        return objectMapper.readValue(new File(filename), new TypeReference<>() {
+        });
     }
 }

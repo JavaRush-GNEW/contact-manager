@@ -13,7 +13,7 @@ import java.util.concurrent.Callable;
 @CommandLine.Command(name = "--edit-menu", description = "Редагує існуючий контакт за ім'ям")
 public class EditContactMenu implements Callable<Integer> {
     private final PhoneBookInterface phoneBookInterface;
-    private Contact contact;
+    private final Contact contact;
     Scanner scanner = new Scanner(System.in);
     @CommandLine.Parameters(index = "0", description = "ID контакта", arity = "1")
     private String choice;
@@ -25,7 +25,7 @@ public class EditContactMenu implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() throws Exception {
+    public Integer call(){
 
         switch (choice) {
             case "1":

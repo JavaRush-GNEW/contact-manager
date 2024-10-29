@@ -5,7 +5,6 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import ua.com.javarush.gnew.m2.entity.Contact;
-import ua.com.javarush.gnew.m2.entity.SimpleContact;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
 
@@ -122,7 +121,7 @@ public class PhoneBookCLI implements Callable<Integer> {
 
         @Override
         public Integer call() {
-            listId.forEach(id-> phoneBookInterface.delete(id));
+            listId.forEach(phoneBookInterface::delete);
             System.out.println("Контакт видалено: ");
             Utils.printContactList(phoneBookInterface.list());
             return 0;

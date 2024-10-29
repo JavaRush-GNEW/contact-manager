@@ -2,12 +2,10 @@ package ua.com.javarush.gnew.m2.utils;
 
 import ua.com.javarush.gnew.m2.entity.Contact;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Utils {
-   private static String format = "| %-10s | %-20s | %-30s | %-45s| %n";
+   private static final String format = "| %-10s | %-20s | %-30s | %-45s| %n";
 
     public static void printContactToTableRow(Contact contact) {
         System.out.format(format, contact.getId(),
@@ -36,8 +34,7 @@ public class Utils {
 
 
 
-        private static String joining(List<String> str){
-      return   str.stream().
-              collect(Collectors.joining(", "));
+    private static String joining(List<String> str){
+      return String.join(", ", str);
     }
 }

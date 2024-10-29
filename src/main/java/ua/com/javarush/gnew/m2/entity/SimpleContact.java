@@ -3,10 +3,8 @@ package ua.com.javarush.gnew.m2.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 import static ua.com.javarush.gnew.m2.entity.Email.mapToEmail;
 import static ua.com.javarush.gnew.m2.entity.Email.mapToEmailString;

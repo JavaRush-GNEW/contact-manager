@@ -16,12 +16,12 @@ public class Email {
 
     public static List<Email> mapToEmail(List<String> emails){
         return emails.stream()
-                .map(s->new Email(s))
+                .map(Email::new)
                 .collect(Collectors.toList());
     }
     public static List<String> mapToEmailString(List<Email> emails){
         return emails.stream()
-                .map(e->e.getEmail())
+                .map(Email::getEmail)
                 .collect(Collectors.toList());
     }
 

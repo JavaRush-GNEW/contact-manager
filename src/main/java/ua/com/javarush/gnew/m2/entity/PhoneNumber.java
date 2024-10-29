@@ -22,12 +22,12 @@ public class PhoneNumber {
 
     public static List<PhoneNumber> mapToPhoneNumber(List<String> phones){
         return phones.stream()
-                .map(s->new PhoneNumber(s))
+                .map(PhoneNumber::new)
                 .collect(Collectors.toList());
     }
     public static List<String> mapToPhoneString(List<PhoneNumber> phoneNumbers){
         return phoneNumbers.stream()
-                .map(p->p.getPhone())
+                .map(PhoneNumber::getPhone)
                 .collect(Collectors.toList());
     }
 
