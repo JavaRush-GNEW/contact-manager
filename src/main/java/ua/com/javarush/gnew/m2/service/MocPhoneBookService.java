@@ -1,6 +1,11 @@
 package ua.com.javarush.gnew.m2.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import lombok.SneakyThrows;
+import ua.com.javarush.gnew.m2.config.PhoneBookContext;
 import ua.com.javarush.gnew.m2.entity.Contact;
+import ua.com.javarush.gnew.m2.entity.SimpleContact;
 import ua.com.javarush.gnew.m2.utils.Utils;
 
 import java.util.ArrayList;
@@ -8,59 +13,107 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class MocPhoneBookService implements PhoneBookInterface{
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 
-   final private List<Contact> phoneBook =new ArrayList<>(){{
-        add(new Contact("12340","Chris Hemsworth",
-                new String[]{"+380671111111","+380672222222"},
-                new String[]{"chris.h@m.ua","chris.h@gmail.com"}));
-        add(new Contact("12341","Chris Pratt",
-                new String[]{"+380673333333","+380674444444"},
-                new String[]{"chris.p@m.ua","chris.p@gmail.com"}));
-        add(new Contact("12342","Scarlett Johansson",
-                new String[]{"+380675555555","+380676666666"},
-                new String[]{"Scarlett.j@m.ua","Scarlett.j@gmail.com"}));
-        add(new Contact("12343","Jeremy Renner",
-                new String[]{"+380677777777","+380678888888"},
-                new String[]{"Jeremy.r@m.ua","Jeremy.r@gmail.com"}));
-    }};
+public class MocPhoneBookService implements PhoneBookInterface {
+
+    private PhoneBookContext  context;
+    private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);;
+
+    final private List<Contact> phoneBook = new ArrayList<>();
+//        {{
+//        add(new SimpleContact("12340", "Chris Hemsworth",
+//                List.of("+380671111111", "+380672222222"),
+//                List.of("chris.h@m.ua", "chris.h@gmail.com")));
+//        add(new SimpleContact("12341", "Chris Pratt",
+//                List.of("+380673333333", "+380674444444"),
+//                List.of("chris.p@m.ua", "chris.p@gmail.com")));
+//        add(new SimpleContact("12342", "Scarlett Johansson",
+//                List.of("+380675555555", "+380676666666"),
+//                List.of("Scarlett.j@m.ua", "Scarlett.j@gmail.com")));
+//        add(new SimpleContact("12343", "Jeremy Renner",
+//                List.of("+380677777777", "+380678888888"),
+//                List.of("Jeremy.r@m.ua", "Jeremy.r@gmail.com")));
+//    }};
 
 
+    @SneakyThrows
+    public MocPhoneBookService(PhoneBookContext context) {
+        this.context = context;
+//        saveContactsToFile(phoneBook,context.getUser()+"phonebook.book");
+        phoneBook.addAll(loadContactsFromFile(context.getUser()+"phonebook.book"));
 
+
+    }
 
     @Override
-    public void add(Contact contact) {
+    public Contact add(String fullName, List<String> phones, List<String> emails) {
+        Contact contact = new SimpleContact(fullName,phones,emails);
+        phoneBook.add(contact);
+        try {
+            saveContactsToFile(phoneBook, context.getUser()+"phonebook.book");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return contact;
 
     }
 
     @Override
     public List<Contact> search(String str) {
-       return phoneBook.stream()
-                .filter(c-> Utils.getFormattedStringFromContact(c).contains(str))
+        return phoneBook.stream()
+                .filter(c -> Utils.getFormattedStringFromContact(c).contains(str))
                 .collect(Collectors.toList());
     }
 
     @Override
     public void edit(Contact contact) {
+    phoneBook.stream()
+                .filter(c->c.getId().equals(contact.getId()))
+                .findFirst()
+               .ifPresent(c->c=contact);
+        try {
+            saveContactsToFile(phoneBook, context.getUser()+"phonebook.book");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
     @Override
     public void delete(String id) {
         phoneBook.stream()
-                .filter(c->c.getId().equals(id))
+                .filter(c -> c.getId().equals(id))
                 .findFirst()
-                .ifPresent((c)->phoneBook.remove(c));
+                .ifPresent((c) -> phoneBook.remove(c));
+        try {
+            saveContactsToFile(phoneBook, context.getUser()+"phonebook.book");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
     public List<Contact> list() {
+        //            this.phoneBook.addAll(loadContactsFromFile(context.getUser()+"phonebook.book"));
         return phoneBook;
     }
 
     @Override
     public Optional<Contact> getById(String id) {
-       return phoneBook.stream()
-               .filter(c->c.getId().equals(id))
-               .findFirst();
+        return phoneBook.stream()
+                .filter(c -> c.getId().equals(id))
+                .findFirst();
+    }
+
+    public void saveContactsToFile(List<Contact> contacts, String filename) throws IOException {
+        objectMapper.writeValue(new File(filename), contacts);
+    }
+    public List<SimpleContact> loadContactsFromFile(String filename) throws IOException {
+        return objectMapper.readValue(new File(filename), new TypeReference<List<SimpleContact>>() {});
     }
 }

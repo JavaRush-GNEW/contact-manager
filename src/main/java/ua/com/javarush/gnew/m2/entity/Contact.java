@@ -1,41 +1,22 @@
 package ua.com.javarush.gnew.m2.entity;
 
-import lombok.Data;
+import java.util.List;
 
-import java.util.Arrays;
-import java.util.Date;
+public interface Contact {
 
-@Data
-public class Contact {
-    /**
-     * TODO: Add normal id generator.
-     */
+    String getId();
 
-    private String id = String.valueOf((long) (Math.random()*10000));
-    private String fullName;
-    private String[] phones = new String[3];
-    private String[] emails = new String[3];
+    String getFullName();
 
-    public Contact(String fullName, String[] phones, String[] emails) {
-        this.fullName = fullName;
-        this.phones = phones;
-        this.emails = emails;
-    }
+    List<String> getPhones();
 
-    public Contact(String id, String fullName, String[] phones, String[] emails) {
-        this.id = id;
-        this.fullName = fullName;
-        this.phones = phones;
-        this.emails = emails;
-    }
+    List<String> getEmails();
 
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "id='" + id + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", phones=" + Arrays.toString(phones) +
-                ", emails=" + Arrays.toString(emails) +
-                '}';
-    }
+    void setId(String id);
+
+    void setFullName(String fullName);
+
+    void setPhones(List<String> phones);
+
+    void setEmails(List<String> emails);
 }

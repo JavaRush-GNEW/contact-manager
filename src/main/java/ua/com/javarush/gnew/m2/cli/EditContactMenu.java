@@ -32,7 +32,7 @@ public class EditContactMenu implements Callable<Integer> {
                 System.out.print("1. Введiть нове iм'я: ");
                 String change = scanner.nextLine();
                 contact.setFullName(change);
-                phoneBookInterface.add(contact);
+                phoneBookInterface.edit(contact);
                 Utils.printContactList(List.of(contact));
                 break;
             case "2":

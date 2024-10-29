@@ -36,7 +36,8 @@ public class Utils {
 
 
 
-        private static String joining(String[] str){
-      return   Arrays.stream(str).collect(Collectors.joining(", "));
+        private static String joining(List<String> str){
+      return   str.stream().
+              collect(Collectors.joining(", "));
     }
 }

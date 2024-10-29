@@ -5,6 +5,7 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import ua.com.javarush.gnew.m2.entity.Contact;
+import ua.com.javarush.gnew.m2.entity.SimpleContact;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
 
@@ -32,9 +33,9 @@ public class PhoneBookCLI implements Callable<Integer> {
         private String name;
 
         @Option(names = {"-p", "--phone"}, description = "Номер телефону", required = true, arity = "0..3")
-        private String[] phones;
+        private List<String> phones;
         @Option(names = {"-e", "--email"}, description = "Електронна пошта", required = true, arity = "0..3")
-        private String[] emails;
+        private List<String> emails;
 
         public AddContact(PhoneBookInterface phoneBookInterface) {
             this.phoneBookInterface = phoneBookInterface;
@@ -42,9 +43,12 @@ public class PhoneBookCLI implements Callable<Integer> {
 
         @Override
         public Integer call() {
-            Contact contact = new Contact(name, phones, emails);
-            phoneBookInterface.add(contact);
-            System.out.println("Контакт додано: " + name + " - " + phones[0]);
+            try {
+                Contact contact = phoneBookInterface.add(name, phones, emails);
+                System.out.println("Контакт додано: " + name+" ID: "+contact.getId());
+            } catch (Exception e) {
+                System.out.println("Помилка, невірний формат: " + name);
+            }
             return 0;
         }
     }
@@ -97,8 +101,6 @@ public class PhoneBookCLI implements Callable<Integer> {
                 System.out.print("Ваш вибiр: ");
                 choice = scanner.nextLine();
                 new CommandLine(new EditContactMenu(phoneBookInterface, contact)).execute(choice);
-                phoneBookInterface.edit(contact);
-
             }
             System.out.println("Контакт оновлено: ");
             return 0;
@@ -110,9 +112,6 @@ public class PhoneBookCLI implements Callable<Integer> {
     public static class DeleteContact implements Callable<Integer> {
 
         private final PhoneBookInterface phoneBookInterface;
-
-//        @Option(names = {"-n", "--name"}, description = "Ім'я для видалення", required = true)
-//        private String name;
 
         @Parameters(index = "0", description = "ID контакта", arity = "1..*")
         private List<String> listId;

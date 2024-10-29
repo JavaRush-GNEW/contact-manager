@@ -1,0 +1,21 @@
+[ {
+  "id" : "12340",
+  "fullName" : "Chris Hemsworth",
+  "phones" : [ "+380671111111", "+380672222222" ],
+  "emails" : [ "chris.h@m.ua", "chris.h@gmail.com" ]
+}, {
+  "id" : "12341",
+  "fullName" : "Chris Pratt",
+  "phones" : [ "+380673333333", "+380674444444" ],
+  "emails" : [ "chris.p@m.ua", "chris.p@gmail.com" ]
+}, {
+  "id" : "12342",
+  "fullName" : "Scarlett Johansson",
+  "phones" : [ "+380675555555", "+380676666666" ],
+  "emails" : [ "Scarlett.j@m.ua", "Scarlett.j@gmail.com" ]
+}, {
+  "id" : "12343",
+  "fullName" : "Jeremy Renner",
+  "phones" : [ "+380677777777", "+380678888888" ],
+  "emails" : [ "Jeremy.r@m.ua", "Jeremy.r@gmail.com" ]
+} ]

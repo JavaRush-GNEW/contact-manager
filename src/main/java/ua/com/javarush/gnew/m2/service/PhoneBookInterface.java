@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface PhoneBookInterface {
 
-    void add(Contact contact);
+    Contact add(String fullName, List<String> phones, List<String> emails);
     List<Contact> search(String str);
     void edit(Contact contact);
     void delete(String id);
