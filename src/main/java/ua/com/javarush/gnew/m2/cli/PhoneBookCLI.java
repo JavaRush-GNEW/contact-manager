@@ -2,9 +2,16 @@ package ua.com.javarush.gnew.m2.cli;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import ua.com.javarush.gnew.m2.cli.commands.*;
+import ua.com.javarush.gnew.m2.cli.commands.AddContact;
+import ua.com.javarush.gnew.m2.cli.commands.DeleteContact;
+import ua.com.javarush.gnew.m2.cli.commands.EditContact;
+import ua.com.javarush.gnew.m2.cli.commands.ListContacts;
+import ua.com.javarush.gnew.m2.cli.commands.SearchContact;
+import ua.com.javarush.gnew.m2.cli.commands.SetUser;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.service.SimplePhoneBook;
+
+
 
 @Command(name = "phonebook", mixinStandardHelpOptions = true, version = "PhoneBook CLI 1.0",
         description = "CLI для управління контактами в телефонній книзі")

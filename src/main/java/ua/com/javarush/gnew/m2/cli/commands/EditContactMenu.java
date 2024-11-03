@@ -6,7 +6,8 @@ import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
 import java.util.List;
 import java.util.Scanner;
-import static picocli.CommandLine.*;
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
 @Command(name = "--edit-menu", description = "Редагує існуючий контакт за ім'ям")
 public class EditContactMenu implements CliCommand {

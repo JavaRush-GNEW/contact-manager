@@ -3,8 +3,7 @@ package ua.com.javarush.gnew.m2.cli.commands;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
-import static picocli.CommandLine.*;
-
+import static picocli.CommandLine.Command;
 
 @Command(name = "list",
         aliases = {"-ls", "--list"},

@@ -1,7 +1,8 @@
 package ua.com.javarush.gnew.m2.cli.commands;
 
 import ua.com.javarush.gnew.m2.cli.CliCommand;
-import static picocli.CommandLine.*;
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
 @Command(name = "user",
         aliases = {"-u", "--user"},

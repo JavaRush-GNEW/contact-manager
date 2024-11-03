@@ -3,7 +3,8 @@ package ua.com.javarush.gnew.m2.cli.commands;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
-import static picocli.CommandLine.*;
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
 @Command(name = "search", aliases = {"-s", "--search"},
         mixinStandardHelpOptions = true,

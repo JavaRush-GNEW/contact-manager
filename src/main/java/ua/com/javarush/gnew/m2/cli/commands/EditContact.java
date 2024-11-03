@@ -8,7 +8,8 @@ import ua.com.javarush.gnew.m2.utils.Utils;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import static picocli.CommandLine.*;
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
 @Command(name = "--edit", aliases = {"-e", "--edit"},
         description = "Редагує існуючий контакт за ім'ям")
