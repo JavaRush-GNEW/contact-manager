@@ -1,9 +1,8 @@
-package ua.com.javarush.gnew.m2.demo;
+package ua.com.javarush.gnew.m2.Repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
-import ua.com.javarush.gnew.m2.dto.ContactDtoRepository;
 
 import java.io.File;
 import java.io.IOException;

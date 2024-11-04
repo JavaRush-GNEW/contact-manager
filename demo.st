@@ -1,4 +1,6 @@
 {
   "id" : 1,
-  "f
+  "fullName" : "Иван Иванов",
+  "phones" : [ "+123456789" ],
+  "emails" : [ "ivan@example.com" ]
 }

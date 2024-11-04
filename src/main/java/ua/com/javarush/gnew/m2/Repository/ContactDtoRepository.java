@@ -1,4 +1,6 @@
-package ua.com.javarush.gnew.m2.dto;
+package ua.com.javarush.gnew.m2.Repository;
+
+import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 import java.io.IOException;
 
