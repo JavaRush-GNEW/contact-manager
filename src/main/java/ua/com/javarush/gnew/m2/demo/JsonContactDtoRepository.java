@@ -14,7 +14,7 @@ public class JsonContactDtoRepository implements ContactDtoRepository {
    ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     @Override
     public ContactDto load() throws IOException {
-        return objectMapper.readValue(new File("demo.st"), ContactDto.class);
+        return objectMapper.readValue(new File("demo.st"),ContactDto.class);
     }
     @Override
     public ContactDto findById(long id) throws IOException {

@@ -23,7 +23,6 @@ public class ContactDto  {
                       @JsonProperty("fullName") String fullName,
                       @JsonProperty("phones") List<String> phones,
                       @JsonProperty("emails") List<String> emails) {
-
         this.id = id;
         this.fullName = fullName;
         this.phones = phones;
