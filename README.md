@@ -1,6 +1,4 @@
 # contact-manager
-[![JavaRush University](https://img.shields.io/badge/java-rush-orange?style=for-the-badge&color=orange&cacheSeconds=3600)](https://javarush.com/ua/university/)
-
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e34fd4467d234fcaab31765bc99e14a6)](https://app.codacy.com/gh/JavaRush-GNEW/contact-manager/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 
