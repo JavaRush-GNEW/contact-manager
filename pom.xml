@@ -140,6 +140,7 @@
                                     <mainClass>ua/com/javarush/gnew/m2/Main</mainClass>
                                 </transformer>
                             </transformers>
+                            <finalName>contact-manager</finalName>
                         </configuration>
                     </execution>
                 </executions>
