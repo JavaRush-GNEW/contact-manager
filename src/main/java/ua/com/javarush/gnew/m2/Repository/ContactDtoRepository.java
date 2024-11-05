@@ -23,12 +23,4 @@ public interface ContactDtoRepository {
      default void saveAll(List<ContactDto> contacts) throws IOException {
         objectMapper.writeValue(new File("demo.st"),contacts);
     }
-
-
-     default void save(ContactDto contact) throws IOException {
-        List<ContactDto> contacts = loadAll();
-        contacts.add(contact);
-        saveAll(contacts);
-    }
-
 }
