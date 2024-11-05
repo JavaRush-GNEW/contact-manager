@@ -1,28 +1,26 @@
-package ua.com.javarush.gnew.m2.cli;
+package ua.com.javarush.gnew.m2.cli.commands;
 
-
-import picocli.CommandLine;
+import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
-
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.Callable;
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
-@CommandLine.Command(name = "--edit-menu", description = "Редагує існуючий контакт за ім'ям")
-public class EditContactMenu implements Callable<Integer> {
+@Command(name = "--edit-menu", description = "Редагує існуючий контакт за ім'ям")
+public class EditContactMenu implements CliCommand {
     private final PhoneBookInterface phoneBookInterface;
 
     private final ContactDto contact;
 
     Scanner scanner = new Scanner(System.in);
 
-    @CommandLine.Parameters(index = "0",
+    @Parameters(index = "0",
             description = "ID контакта",
             arity = "1")
     private String choice;
-
 
     public EditContactMenu(PhoneBookInterface phoneBookInterface, ContactDto contact) {
         this.phoneBookInterface = phoneBookInterface;
