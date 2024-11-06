@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PhoneNumber {
-    String phone;
+  String phone;
 
-    public PhoneNumber(String phone) {
-        if(phone.matches("^\\(?(\\+?\\d{1,3})?\\)?[-.\\s]?(\\d{2,3})?[-.\\s]?\\d{3}[-.\\s]?\\d{2}[-.\\s]?\\d{2}$")){
-            this.phone = phone;
-        }else {
-            throw new IllegalArgumentException("Invalid phone number format: " + phone);
-        }
-
+  public PhoneNumber(String phone) {
+    if (phone.matches(
+        "^\\(?(\\+?\\d{1,3})?\\)?[-.\\s]?(\\d{2,3})?[-.\\s]?\\d{3}[-.\\s]?\\d{2}[-.\\s]?\\d{2}$")) {
+      this.phone = phone;
+    } else {
+      throw new IllegalArgumentException("Invalid phone number format: " + phone);
     }
+  }
 }
