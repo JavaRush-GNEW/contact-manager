@@ -4,17 +4,17 @@ import java.util.List;
 
 public interface ContactEntity {
 
-    String getId();
+  String getId();
 
-    String getFullName();
+  String getFullName();
 
-    List<PhoneNumber> getPhones();
+  List<PhoneNumber> getPhones();
 
-    List<Email> getEmails();
+  List<Email> getEmails();
 
-    void setFullName(String fullName);
+  void setFullName(String fullName);
 
-    void setPhones(List<PhoneNumber> phones);
+  void setPhones(List<PhoneNumber> phones);
 
-    void setEmails(List<Email> emails);
+  void setEmails(List<Email> emails);
 }
