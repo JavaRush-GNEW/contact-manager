@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Scanner;
 import picocli.CommandLine;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
+import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
@@ -48,7 +49,9 @@ public class EditContact implements CliCommand {
         System.out.print("Ваш вибiр: ");
         choice = scanner.nextLine();
         if (choice.equals("4")) return 0;
-        new CommandLine(new EditContactMenu(phoneBookInterface, contactDto)).execute(choice);
+        EditContactMenu editContactMenu = PhoneBookContext.getBean(EditContactMenu.class);
+        editContactMenu.setContact(contactDto);
+        new CommandLine(editContactMenu).execute(choice);
       }
     } else System.out.println("Помилка. Такого контакту не існує. Спробуйте ще раз.");
 

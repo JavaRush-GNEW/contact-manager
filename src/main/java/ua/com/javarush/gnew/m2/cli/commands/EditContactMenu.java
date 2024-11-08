@@ -5,25 +5,26 @@ import static picocli.CommandLine.Parameters;
 
 import java.util.List;
 import java.util.Scanner;
+import lombok.Data;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
 
+@Data
 @Command(name = "--edit-menu", description = "Редагує існуючий контакт за ім'ям")
 public class EditContactMenu implements CliCommand {
   private final PhoneBookInterface phoneBookInterface;
 
-  private final ContactDto contact;
+  private ContactDto contact;
 
   Scanner scanner = new Scanner(System.in);
 
   @Parameters(index = "0", description = "ID контакта", arity = "1")
   private String choice;
 
-  public EditContactMenu(PhoneBookInterface phoneBookInterface, ContactDto contact) {
+  public EditContactMenu(PhoneBookInterface phoneBookInterface) {
     this.phoneBookInterface = phoneBookInterface;
-    this.contact = contact;
   }
 
   @Override
