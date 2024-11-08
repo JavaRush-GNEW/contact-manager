@@ -1,19 +1,19 @@
 package ua.com.javarush.gnew.m2.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.SneakyThrows;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 public interface ContactDtoRepository {
   ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+
   @SneakyThrows
   default List<ContactDto> findAll() throws IOException {
     File file = new File("demo.st");
@@ -21,7 +21,8 @@ public interface ContactDtoRepository {
       return new ArrayList<>();
     }
 
-    return objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
+    return objectMapper.readValue(
+        file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
   }
 
   @SneakyThrows
@@ -42,8 +43,9 @@ public interface ContactDtoRepository {
 
   @SneakyThrows
   default void saveAll(List<ContactDto> contacts) throws IOException {
-    objectMapper.writeValue(new File("demo.st"),contacts);
-  };
+    objectMapper.writeValue(new File("demo.st"), contacts);
+  }
+  ;
 
   default void save(ContactDto contactDto) throws IOException {
     List<ContactDto> contacts = findAll();
@@ -54,9 +56,11 @@ public interface ContactDtoRepository {
   default List<ContactDto> findByKeyword(String keyword) throws IOException {
     List<ContactDto> contacts = findAll();
     return contacts.stream()
-            .filter(contact -> contact.getFullName().contains(keyword) ||
-                    contact.getPhones().stream().anyMatch(phones -> phones.contains(keyword)) ||
-                    contact.getEmails().stream().anyMatch(emails -> emails.contains(keyword)))
-            .collect(Collectors.toList());
+        .filter(
+            contact ->
+                contact.getFullName().contains(keyword)
+                    || contact.getPhones().stream().anyMatch(phones -> phones.contains(keyword))
+                    || contact.getEmails().stream().anyMatch(emails -> emails.contains(keyword)))
+        .collect(Collectors.toList());
   }
 }
