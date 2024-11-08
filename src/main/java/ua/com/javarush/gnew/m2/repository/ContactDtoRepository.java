@@ -1,17 +1,66 @@
 package ua.com.javarush.gnew.m2.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import lombok.SneakyThrows;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 public interface ContactDtoRepository {
-  List<ContactDto> findAll();
+  ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-  Optional<ContactDto> findById(long id);
+  @SneakyThrows
+  default List<ContactDto> findAll() throws IOException {
+    File file = new File("demo.st");
+    if (!file.exists()) {
+      return new ArrayList<>();
+    }
 
-  void deleteById(long id);
+    return objectMapper.readValue(
+        file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
+  }
 
-  void saveAll(List<ContactDto> contacts);
+  @SneakyThrows
+  default Optional<ContactDto> findById(long id) throws IOException {
+    return findAll().stream().filter(contact -> contact.getId() == id).findFirst();
+  }
 
-  void save(ContactDto contactDto);
+  default void deleteById(long id) throws IOException {
+    Optional<ContactDto> contactToDelete = findById(id);
+    if (contactToDelete.isPresent()) {
+      List<ContactDto> contacts = findAll();
+      contacts.remove(contactToDelete.get());
+      saveAll(contacts);
+    } else {
+      System.out.println("Контакт с id " + id + " не найден.");
+    }
+  }
+
+  @SneakyThrows
+  default void saveAll(List<ContactDto> contacts) throws IOException {
+    objectMapper.writeValue(new File("demo.st"), contacts);
+  }
+  ;
+
+  default void save(ContactDto contactDto) throws IOException {
+    List<ContactDto> contacts = findAll();
+    contacts.add(contactDto);
+    saveAll(contacts);
+  }
+
+  default List<ContactDto> findByKeyword(String keyword) throws IOException {
+    List<ContactDto> contacts = findAll();
+    return contacts.stream()
+        .filter(
+            contact ->
+                contact.getFullName().contains(keyword)
+                    || contact.getPhones().stream().anyMatch(phones -> phones.contains(keyword))
+                    || contact.getEmails().stream().anyMatch(emails -> emails.contains(keyword)))
+        .collect(Collectors.toList());
+  }
 }
