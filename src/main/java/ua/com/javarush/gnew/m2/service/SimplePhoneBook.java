@@ -12,6 +12,7 @@ import ua.com.javarush.gnew.m2.repository.ContactDtoRepository;
 public class SimplePhoneBook implements PhoneBookInterface, ContactDtoRepository {
   @Override
   public ContactDto add(ContactDto contactDto) {
+
    return ContactDto.builder()
             .fullName(contactDto.getFullName())
             .phones(List.of(String.valueOf(contactDto.getPhones())))
@@ -22,6 +23,7 @@ public class SimplePhoneBook implements PhoneBookInterface, ContactDtoRepository
   @SneakyThrows
   @Override
   public List<ContactDto> search(String str) {
+
     List<ContactDto> contacts = findAll();
     return contacts.stream()
             .filter(contact -> contact.getFullName().contains(str) ||

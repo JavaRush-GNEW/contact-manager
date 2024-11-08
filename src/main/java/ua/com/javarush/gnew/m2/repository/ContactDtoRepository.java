@@ -20,6 +20,7 @@ public interface ContactDtoRepository {
     if (!file.exists()) {
       return new ArrayList<>();
     }
+
     return objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
   }
 
@@ -38,6 +39,7 @@ public interface ContactDtoRepository {
       System.out.println("Контакт с id " + id + " не найден.");
     }
   }
+
   @SneakyThrows
   default void saveAll(List<ContactDto> contacts) throws IOException {
     objectMapper.writeValue(new File("demo.st"),contacts);
@@ -48,6 +50,7 @@ public interface ContactDtoRepository {
     contacts.add(contactDto);
     saveAll(contacts);
   }
+
   default List<ContactDto> findByKeyword(String keyword) throws IOException {
     List<ContactDto> contacts = findAll();
     return contacts.stream()
