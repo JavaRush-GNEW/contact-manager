@@ -9,12 +9,10 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.SneakyThrows;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 public interface ContactDtoRepository {
   ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-  @SneakyThrows
   default List<ContactDto> findAll() throws IOException {
     File file = new File("demo.st");
     if (!file.exists()) {
@@ -23,7 +21,7 @@ public interface ContactDtoRepository {
     return objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
   }
 
-  @SneakyThrows
+
   default Optional<ContactDto> findById(long id) throws IOException {
     return findAll().stream().filter(contact -> contact.getId() == id).findFirst();
   }
@@ -38,10 +36,10 @@ public interface ContactDtoRepository {
       System.out.println("Контакт с id " + id + " не найден.");
     }
   }
-  @SneakyThrows
+
   default void saveAll(List<ContactDto> contacts) throws IOException {
     objectMapper.writeValue(new File("demo.st"),contacts);
-  };
+  }
 
   default void save(ContactDto contactDto) throws IOException {
     List<ContactDto> contacts = findAll();
