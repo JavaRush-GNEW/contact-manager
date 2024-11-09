@@ -2,7 +2,9 @@ package ua.com.javarush.gnew.m2.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
+import ua.com.javarush.gnew.m2.service.SettingsService;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,14 +22,21 @@ public class FileContactDtoRepository implements ContactDtoRepository {
 
     @Override
     public List<ContactDto> findAll() throws IOException {
+        List<ContactDto> result=new ArrayList<>();
         File file = new File(user + "book.st");
-        boolean fileCreated = file.createNewFile();
-        if (fileCreated) {
-            System.out.println("Файл был создан: " + file.getAbsolutePath());
-        } else {
-            System.out.println("Не удалось создать файл.");
+        if(!file.exists()) return new ArrayList<>();
+//        boolean fileCreated = file.createNewFile();
+//        if (fileCreated) {
+//            System.out.println("Файл был создан: " + file.getAbsolutePath());
+//        } else {
+//            System.out.println("Не удалось создать файл.");
+//        }
+        try {
+            result = objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
+        } catch (IOException e) {
+            result=new ArrayList<>();
         }
-        return objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
+        return result;
     }
     @Override
     public Optional<ContactDto> findById(long id) throws IOException {

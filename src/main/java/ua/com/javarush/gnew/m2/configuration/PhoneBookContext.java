@@ -1,5 +1,6 @@
 package ua.com.javarush.gnew.m2.configuration;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import ua.com.javarush.gnew.m2.cli.PhoneBookCLI;
@@ -8,11 +9,16 @@ import ua.com.javarush.gnew.m2.repository.ContactDtoRepository;
 import ua.com.javarush.gnew.m2.repository.FileContactDtoRepository;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.service.SimplePhoneBook;
+import ua.com.javarush.gnew.m2.utils.MocTesterPhoneBook;
 
 public class PhoneBookContext {
   private static Map<Class, Object> context = new HashMap<>();
 
   public static void create() {
+
+    ContactDtoRepository contactDtoRepository= new FileContactDtoRepository("tester");
+
+    addBean(ContactDtoRepository.class, contactDtoRepository);
     PhoneBookInterface phoneBook = new SimplePhoneBook();
 
     addBean(PhoneBookCLI.class, new PhoneBookCLI());
@@ -24,7 +30,13 @@ public class PhoneBookContext {
     addBean(SearchContact.class, new SearchContact(phoneBook));
     addBean(SetUser.class, new SetUser());
     addBean(PhoneBookInterface.class, phoneBook);
-    addBean(ContactDtoRepository.class, new FileContactDtoRepository("tester"));
+
+
+      try {
+          MocTesterPhoneBook.createTester();
+      } catch (IOException e) {
+          throw new RuntimeException(e);
+      }
   }
 
   private static void addBean(Class clazz, Object object) {

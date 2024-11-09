@@ -16,6 +16,8 @@ import ua.com.javarush.gnew.m2.utils.Utils;
     mixinStandardHelpOptions = true)
 public class AddContact implements CliCommand {
 
+  //> --add -n "Name" -p 545445645456 46456584646 5646464646465 -e lkjfdlkjslk jkdlwsjkd
+
   private final PhoneBookInterface phoneBookInterface;
 
   @Option(
