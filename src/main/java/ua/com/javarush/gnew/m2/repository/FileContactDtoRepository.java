@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class FileContactDtoRepository implements ContactDtoRepository {
@@ -44,9 +45,15 @@ public class FileContactDtoRepository implements ContactDtoRepository {
     @Override
     public void save(ContactDto contactDto) throws IOException {
         List<ContactDto> contacts = findAll();
+        if (contactDto.getId() == 0) {
+            contactDto.setId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+        }
+
         contacts.add(contactDto);
         saveAll(contacts);
     }
+
+    
     @Override
     public List<ContactDto> findByKeyword(String keyword) throws IOException {
         List<ContactDto> contacts = findAll();
