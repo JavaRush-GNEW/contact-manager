@@ -48,7 +48,7 @@ public class AddContact implements CliCommand {
   public Integer call() {
     try {
       ContactDto newContactDto =
-          ContactDto.builder().fullName(name).phones(phones).emails(emails).build();
+          new ContactDto(name,phones,emails);
       ContactDto savedContactDto = phoneBookInterface.add(newContactDto);
       System.out.println("Контакт додано: ");
       Utils.printContactList(List.of(savedContactDto));

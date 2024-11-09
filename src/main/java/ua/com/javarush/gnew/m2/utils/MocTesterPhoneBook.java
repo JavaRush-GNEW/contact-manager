@@ -17,29 +17,24 @@ public class MocTesterPhoneBook {
 
     if (!file.exists()) {
       repository.save(
-          ContactDto.builder()
-              .fullName("Chris Hemsworth")
-              .phones(List.of("+380671111111", "+380672222222"))
-              .emails(List.of("chris.h@m.ua", "chris.h@gmail.com"))
-              .build());
+          new ContactDto("Chris Hemsworth",
+                  List.of("+380671111111", "+380672222222"),
+                  List.of("chris.h@m.ua", "chris.h@gmail.com"))) ;
       repository.save(
-              ContactDto.builder()
-                      .fullName("Chris Pratt")
-                      .phones(List.of("+380673333333", "+380674444444"))
-                      .emails(List.of("chris.p@m.ua", "chris.p@gmail.com"))
-                      .build());
+               new ContactDto(
+                      "Chris Pratt",
+                      List.of("+380673333333", "+380674444444"),
+                      List.of("chris.p@m.ua", "chris.p@gmail.com")));
       repository.save(
-              ContactDto.builder()
-                      .fullName("Scarlett Johansson")
-                      .phones(List.of("+380675555555", "+380676666666"))
-                      .emails(List.of("Scarlett.j@m.ua", "Scarlett.j@gmail.com"))
-                      .build());
+              new ContactDto(
+                      "Scarlett Johansson",
+                      List.of("+380675555555", "+380676666666"),
+                      List.of("Scarlett.j@m.ua", "Scarlett.j@gmail.com")));
       repository.save(
-              ContactDto.builder()
-                      .fullName("Jeremy Renner")
-                      .phones(List.of("+380677777777", "+380678888888"))
-                      .emails(List.of("Jeremy.r@m.ua", "Jeremy.r@gmail.com"))
-                      .build());
+              new ContactDto(
+                      "Jeremy Renner",
+                      List.of("+380677777777", "+380678888888"),
+                      List.of("Jeremy.r@m.ua", "Jeremy.r@gmail.com")));
     }else {
       repository.findAll().stream().forEach(System.out::println);
     }
