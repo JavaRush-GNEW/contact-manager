@@ -7,6 +7,8 @@ import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
 
+import java.io.IOException;
+
 @Command(
     name = "search",
     aliases = {"-s", "--search"},
@@ -24,7 +26,7 @@ public class SearchContact implements CliCommand {
   }
 
   @Override
-  public Integer call() {
+  public Integer call() throws IOException {
     Utils.printContactList(phoneBookInterface.search(name));
     return 0;
   }
