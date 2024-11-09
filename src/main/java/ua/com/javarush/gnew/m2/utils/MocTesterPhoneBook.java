@@ -13,8 +13,9 @@ public class MocTesterPhoneBook {
 
   public static void createTester() throws IOException {
     File file = new File("testerbook.st");
+    ContactDtoRepository repository = new FileContactDtoRepository("tester");
+
     if (!file.exists()) {
-      ContactDtoRepository repository = new FileContactDtoRepository("tester");
       repository.save(
           ContactDto.builder()
               .fullName("Chris Hemsworth")
@@ -39,6 +40,8 @@ public class MocTesterPhoneBook {
                       .phones(List.of("+380677777777", "+380678888888"))
                       .emails(List.of("Jeremy.r@m.ua", "Jeremy.r@gmail.com"))
                       .build());
+    }else {
+      repository.findAll().stream().forEach(System.out::println);
     }
   }
 }
