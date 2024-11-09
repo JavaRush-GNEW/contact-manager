@@ -16,7 +16,7 @@ public class PhoneBookContext {
 
   public static void create() {
 
-    ContactDtoRepository contactDtoRepository= new FileContactDtoRepository("tester");
+    ContactDtoRepository contactDtoRepository = new FileContactDtoRepository("tester");
 
     addBean(ContactDtoRepository.class, contactDtoRepository);
     PhoneBookInterface phoneBook = new SimplePhoneBook();
@@ -31,12 +31,11 @@ public class PhoneBookContext {
     addBean(SetUser.class, new SetUser());
     addBean(PhoneBookInterface.class, phoneBook);
 
-
-      try {
-          MocTesterPhoneBook.createTester();
-      } catch (IOException e) {
-          throw new RuntimeException(e);
-      }
+    try {
+      MocTesterPhoneBook.createTester();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private static void addBean(Class clazz, Object object) {

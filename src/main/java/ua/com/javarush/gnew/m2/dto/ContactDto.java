@@ -1,12 +1,13 @@
 package ua.com.javarush.gnew.m2.dto;
 
 import java.util.List;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ContactDto {
   private long id;
 

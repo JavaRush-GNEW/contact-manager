@@ -1,6 +1,5 @@
 package ua.com.javarush.gnew.m2.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
