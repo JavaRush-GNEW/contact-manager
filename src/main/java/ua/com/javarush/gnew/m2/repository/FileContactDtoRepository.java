@@ -12,10 +12,15 @@ import java.util.stream.Collectors;
 public class FileContactDtoRepository implements ContactDtoRepository {
     ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-    ArrayList<ContactDto> User = new ArrayList<>();
+    private final String user;
+
+    public FileContactDtoRepository(String user) {
+        this.user = user;
+    }
+
     @Override
     public List<ContactDto> findAll() throws IOException {
-        File file = new File(User + "book.st");
+        File file = new File(user + "book.st");
         boolean fileCreated = file.createNewFile();
         if (fileCreated) {
             System.out.println("Файл был создан: " + file.getAbsolutePath());
@@ -36,7 +41,7 @@ public class FileContactDtoRepository implements ContactDtoRepository {
     }
     @Override
     public void saveAll(List<ContactDto> contacts) throws IOException {
-        objectMapper.writeValue(new File(User + "book.st"),contacts);
+        objectMapper.writeValue(new File(user + "book.st"),contacts);
     }
     @Override
     public void save(ContactDto contactDto) throws IOException {
