@@ -25,7 +25,6 @@ public class PhoneBookCLI implements CliCommand {
   }
 
   public static int init(String[] args) {
-    // > -a "Name" -p 05641454532435 45646545646
     return new CommandLine(getBean(PhoneBookCLI.class))
         .addSubcommand("add", getBean(AddContact.class))
         .addSubcommand("search", getBean(SearchContact.class))
