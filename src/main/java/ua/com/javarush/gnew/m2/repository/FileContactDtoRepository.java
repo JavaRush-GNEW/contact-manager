@@ -33,7 +33,9 @@ public class FileContactDtoRepository implements ContactDtoRepository {
 //        }
         try {
             result = objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
+
         } catch (IOException e) {
+      System.out.println(e);
             result=new ArrayList<>();
         }
         return result;
