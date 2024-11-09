@@ -1,14 +1,8 @@
 package ua.com.javarush.gnew.m2.repository;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 public interface ContactDtoRepository {

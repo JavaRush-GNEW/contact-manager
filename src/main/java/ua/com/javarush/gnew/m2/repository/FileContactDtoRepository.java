@@ -6,20 +6,21 @@ import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FileContactDtoRepository implements ContactDtoRepository {
     ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
+    ArrayList<ContactDto> User = new ArrayList<>();
     @Override
     public List<ContactDto> findAll() throws IOException {
-        File file = new File("demo.st");
-        if (!file.exists()) {
-            return new ArrayList<>();
+        File file = new File(User + "book.st");
+        boolean fileCreated = file.createNewFile();
+        if (fileCreated) {
+            System.out.println("Файл был создан: " + file.getAbsolutePath());
+        } else {
+            System.out.println("Не удалось создать файл.");
         }
         return objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
     }
@@ -29,18 +30,13 @@ public class FileContactDtoRepository implements ContactDtoRepository {
     }
     @Override
     public void deleteById(long id) throws IOException {
-        Optional<ContactDto> contactToDelete = findById(id);
-        if (contactToDelete.isPresent()) {
-            List<ContactDto> contacts = findAll();
-            contacts.remove(contactToDelete.get());
-            saveAll(contacts);
-        } else {
-            System.out.println("Контакт с id " + id + " не найден.");
-        }
+        List<ContactDto> contacts = findAll();
+        contacts.removeIf(contact -> contact.getId() == id);
+        saveAll(contacts);
     }
     @Override
     public void saveAll(List<ContactDto> contacts) throws IOException {
-        objectMapper.writeValue(new File("demo.st"),contacts);
+        objectMapper.writeValue(new File(User + "book.st"),contacts);
     }
     @Override
     public void save(ContactDto contactDto) throws IOException {
