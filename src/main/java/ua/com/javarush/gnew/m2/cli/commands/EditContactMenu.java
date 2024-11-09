@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import lombok.Data;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
+import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
@@ -14,7 +15,8 @@ import ua.com.javarush.gnew.m2.utils.Utils;
 @Data
 @Command(name = "--edit-menu", description = "Редагує існуючий контакт за ім'ям")
 public class EditContactMenu implements CliCommand {
-  private final PhoneBookInterface phoneBookInterface;
+  private final PhoneBookInterface phoneBookInterface =
+      PhoneBookContext.getBean(PhoneBookInterface.class);
 
   private ContactDto contact;
 
@@ -22,10 +24,6 @@ public class EditContactMenu implements CliCommand {
 
   @Parameters(index = "0", description = "ID контакта", arity = "1")
   private String choice;
-
-  public EditContactMenu(PhoneBookInterface phoneBookInterface) {
-    this.phoneBookInterface = phoneBookInterface;
-  }
 
   @Override
   public Integer call() {
