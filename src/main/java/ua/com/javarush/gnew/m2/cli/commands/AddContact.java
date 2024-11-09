@@ -16,7 +16,7 @@ import ua.com.javarush.gnew.m2.utils.Utils;
     mixinStandardHelpOptions = true)
 public class AddContact implements CliCommand {
 
-  //> --add -n "Name" -p 545445645456 46456584646 5646464646465 -e lkjfdlkjslk jkdlwsjkd
+  // > --add -n "Name" -p 545445645456 46456584646 5646464646465 -e lkjfdlkjslk jkdlwsjkd
 
   private final PhoneBookInterface phoneBookInterface;
 
@@ -47,8 +47,7 @@ public class AddContact implements CliCommand {
   @Override
   public Integer call() {
     try {
-      ContactDto newContactDto =
-          new ContactDto(name,phones,emails);
+      ContactDto newContactDto = new ContactDto(name, phones, emails);
       ContactDto savedContactDto = phoneBookInterface.add(newContactDto);
       System.out.println("Контакт додано: ");
       Utils.printContactList(List.of(savedContactDto));
