@@ -1,14 +1,13 @@
 package ua.com.javarush.gnew.m2.service;
 
 import java.io.IOException;
+import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.repository.SettingsRepository;
 
 public class SettingsService implements SettingsServiceInterface {
-  private final SettingsRepository settingsRepository;
-
-  public SettingsService(SettingsRepository settingsRepository) {
-    this.settingsRepository = settingsRepository;
-  }
+  private final SettingsRepository settingsRepository =
+      PhoneBookContext.getBean(SettingsRepository.class);
+  ;
 
   @Override
   public void setUser(String user) throws IOException {

@@ -5,6 +5,7 @@ import static picocli.CommandLine.Option;
 
 import java.util.List;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
+import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
@@ -15,10 +16,8 @@ import ua.com.javarush.gnew.m2.utils.Utils;
     description = "Додає новий контакт до телефонної книги",
     mixinStandardHelpOptions = true)
 public class AddContact implements CliCommand {
-
-  // > --add -n "Name" -p 545445645456 46456584646 5646464646465 -e lkjfdlkjslk jkdlwsjkd
-
-  private final PhoneBookInterface phoneBookInterface;
+  private final PhoneBookInterface phoneBookInterface =
+      PhoneBookContext.getBean(PhoneBookInterface.class);
 
   @Option(
       names = {"-n", "--name"},
@@ -39,10 +38,6 @@ public class AddContact implements CliCommand {
       required = true,
       arity = "0..3")
   private List<String> emails;
-
-  public AddContact(PhoneBookInterface phoneBookInterface) {
-    this.phoneBookInterface = phoneBookInterface;
-  }
 
   @Override
   public Integer call() {

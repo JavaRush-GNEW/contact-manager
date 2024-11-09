@@ -5,6 +5,7 @@ import static picocli.CommandLine.Parameters;
 
 import java.util.List;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
+import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
 
@@ -15,14 +16,11 @@ import ua.com.javarush.gnew.m2.utils.Utils;
     mixinStandardHelpOptions = true)
 public class DeleteContact implements CliCommand {
 
-  private final PhoneBookInterface phoneBookInterface;
+  private final PhoneBookInterface phoneBookInterface =
+      PhoneBookContext.getBean(PhoneBookInterface.class);
 
   @Parameters(index = "0", description = "ID контакта", arity = "1..*")
   private List<Long> listId;
-
-  public DeleteContact(PhoneBookInterface phoneBookInterface) {
-    this.phoneBookInterface = phoneBookInterface;
-  }
 
   @Override
   public Integer call() {

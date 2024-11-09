@@ -8,6 +8,8 @@ import ua.com.javarush.gnew.m2.cli.commands.*;
 import ua.com.javarush.gnew.m2.repository.ContactDtoRepository;
 import ua.com.javarush.gnew.m2.repository.FileContactDtoRepository;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
+import ua.com.javarush.gnew.m2.service.SettingsService;
+import ua.com.javarush.gnew.m2.service.SettingsServiceInterface;
 import ua.com.javarush.gnew.m2.service.SimplePhoneBook;
 import ua.com.javarush.gnew.m2.utils.MocTesterPhoneBook;
 
@@ -17,19 +19,22 @@ public class PhoneBookContext {
   public static void create() {
 
     ContactDtoRepository contactDtoRepository = new FileContactDtoRepository("tester");
-
     addBean(ContactDtoRepository.class, contactDtoRepository);
+
     PhoneBookInterface phoneBook = new SimplePhoneBook();
+    addBean(PhoneBookInterface.class, phoneBook);
+
+    SettingsServiceInterface serviceInterface = new SettingsService();
+    addBean(SettingsServiceInterface.class, serviceInterface);
 
     addBean(PhoneBookCLI.class, new PhoneBookCLI());
-    addBean(AddContact.class, new AddContact(phoneBook));
-    addBean(DeleteContact.class, new DeleteContact(phoneBook));
-    addBean(EditContact.class, new EditContact(phoneBook));
-    addBean(EditContactMenu.class, new EditContactMenu(phoneBook));
-    addBean(ListContacts.class, new ListContacts(phoneBook));
-    addBean(SearchContact.class, new SearchContact(phoneBook));
+    addBean(AddContact.class, new AddContact());
+    addBean(DeleteContact.class, new DeleteContact());
+    addBean(EditContact.class, new EditContact());
+    addBean(EditContactMenu.class, new EditContactMenu());
+    addBean(ListContacts.class, new ListContacts());
+    addBean(SearchContact.class, new SearchContact());
     addBean(SetUser.class, new SetUser());
-    addBean(PhoneBookInterface.class, phoneBook);
 
     try {
       MocTesterPhoneBook.createTester();
