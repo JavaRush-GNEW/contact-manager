@@ -3,6 +3,7 @@ package ua.com.javarush.gnew.m2.cli.commands;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import lombok.Data;
@@ -26,7 +27,7 @@ public class EditContactMenu implements CliCommand {
   private String choice;
 
   @Override
-  public Integer call() {
+  public Integer call() throws IOException {
 
     switch (choice) {
       case "1":
@@ -57,7 +58,7 @@ public class EditContactMenu implements CliCommand {
     return 0;
   }
 
-  private void update(ContactDto contact) {
+  private void update(ContactDto contact) throws IOException {
     phoneBookInterface.edit(contact);
     System.out.println("Контакт оновлено: ");
     Utils.printContactList(List.of(contact));

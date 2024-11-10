@@ -11,7 +11,7 @@ public interface PhoneBookInterface {
 
   List<ContactDto> search(String str) throws IOException;
 
-  void edit(ContactDto contact);
+  void edit(ContactDto contact) throws IOException;
 
   void delete(long id) throws IOException;
 
