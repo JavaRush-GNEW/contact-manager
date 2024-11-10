@@ -24,8 +24,8 @@ public class SimplePhoneBook implements PhoneBookInterface {
   }
 
   @Override
-  public void edit(ContactDto contact) {
-    // TODO: implement this method
+  public void edit(ContactDto contact) throws IOException {
+    contactDtoRepository.findById(contact.getId());
   }
 
   @Override
