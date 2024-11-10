@@ -4,12 +4,7 @@ import static ua.com.javarush.gnew.m2.configuration.PhoneBookContext.getBean;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import ua.com.javarush.gnew.m2.cli.commands.AddContact;
-import ua.com.javarush.gnew.m2.cli.commands.DeleteContact;
-import ua.com.javarush.gnew.m2.cli.commands.EditContact;
-import ua.com.javarush.gnew.m2.cli.commands.ListContacts;
-import ua.com.javarush.gnew.m2.cli.commands.SearchContact;
-import ua.com.javarush.gnew.m2.cli.commands.SetUser;
+import ua.com.javarush.gnew.m2.cli.commands.*;
 
 @Command(
     name = "phonebook",
@@ -32,6 +27,7 @@ public class PhoneBookCLI implements CliCommand {
         .addSubcommand("delete", getBean(DeleteContact.class))
         .addSubcommand("list", getBean(ListContacts.class))
         .addSubcommand("user", getBean(SetUser.class))
+            .addSubcommand("locale", getBean(SetLocale.class))
         .execute(args);
   }
 }
