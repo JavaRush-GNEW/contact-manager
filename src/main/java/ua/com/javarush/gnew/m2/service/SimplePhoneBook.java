@@ -28,18 +28,17 @@ public class SimplePhoneBook implements PhoneBookInterface {
   }
 
   @Override
-  public void delete(long id) {
-    // TODO: implement this method
-
+  public void delete(long id) throws IOException {
+    contactDtoRepository.deleteById(id);
   }
 
   @Override
-  public List<ContactDto> list() {
+  public List<ContactDto> list() throws IOException {
     return contactDtoRepository.findAll();
   }
 
   @Override
-  public Optional<ContactDto> getById(long id) {
-    return Optional.empty();
+  public Optional<ContactDto> getById(long id) throws IOException {
+    return contactDtoRepository.findById(id);
   }
 }

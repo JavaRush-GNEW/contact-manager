@@ -7,6 +7,8 @@ import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
 
+import java.io.IOException;
+
 @Command(
     name = "list",
     aliases = {"-ls", "--list"},
@@ -17,7 +19,7 @@ public class ListContacts implements CliCommand {
       PhoneBookContext.getBean(PhoneBookInterface.class);
 
   @Override
-  public Integer call() {
+  public Integer call() throws IOException {
     Utils.printContactList(phoneBookInterface.list());
     return 0;
   }

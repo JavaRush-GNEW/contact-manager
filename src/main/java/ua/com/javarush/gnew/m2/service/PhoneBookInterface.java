@@ -13,9 +13,9 @@ public interface PhoneBookInterface {
 
   void edit(ContactDto contact);
 
-  void delete(long id);
+  void delete(long id) throws IOException;
 
-  List<ContactDto> list();
+  List<ContactDto> list() throws IOException;
 
-  Optional<ContactDto> getById(long id);
+  Optional<ContactDto> getById(long id) throws IOException;
 }
