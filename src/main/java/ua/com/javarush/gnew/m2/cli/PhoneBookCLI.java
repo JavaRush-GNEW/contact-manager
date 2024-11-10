@@ -28,7 +28,7 @@ public class PhoneBookCLI implements CliCommand {
         .addSubcommand("delete", getBean(DeleteContact.class))
         .addSubcommand("list", getBean(ListContacts.class))
         .addSubcommand("user", getBean(SetUser.class))
-            .addSubcommand("language", getBean(SetLocale.class))
+            .addSubcommand("locale", getBean(SetLocale.class))
         .execute(args);
   }
 }
