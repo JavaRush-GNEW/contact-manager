@@ -30,7 +30,7 @@ public class SimplePhoneBook implements PhoneBookInterface {
 
   @Override
   public void delete(long id) throws IOException {
-
+    contactDtoRepository.deleteById(id);
   }
 
   @Override

@@ -27,7 +27,7 @@ public class DeleteContact implements CliCommand {
 
   @SneakyThrows
   @Override
-  public Integer call() throws IOException {
+  public Integer call() {
     listId.forEach(phoneBookInterface::delete);
     System.out.println("Контакт видалено: ");
     Utils.printContactList(phoneBookInterface.list());
