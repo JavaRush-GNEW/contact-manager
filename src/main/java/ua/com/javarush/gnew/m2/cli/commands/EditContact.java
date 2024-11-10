@@ -3,6 +3,7 @@ package ua.com.javarush.gnew.m2.cli.commands;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -29,7 +30,7 @@ public class EditContact implements CliCommand {
   private long id;
 
   @Override
-  public Integer call() {
+  public Integer call() throws IOException {
 
     Optional<ContactDto> optionalContact = phoneBookInterface.getById(id);
 
