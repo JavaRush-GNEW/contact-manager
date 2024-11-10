@@ -7,17 +7,15 @@ import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 public interface ContactDtoRepository {
 
-   List<ContactDto> findAll() throws IOException ;
+  List<ContactDto> findAll() throws IOException;
 
+  Optional<ContactDto> findById(long id) throws IOException;
 
-   Optional<ContactDto> findById(long id) throws IOException ;
+  void deleteById(long id) throws IOException;
 
-   void deleteById(long id) throws IOException;
+  void saveAll(List<ContactDto> contacts) throws IOException;
 
-   void saveAll(List<ContactDto> contacts) throws IOException;
+  void save(ContactDto contactDto) throws IOException;
 
-   void save(ContactDto contactDto) throws IOException;
-
-   List<ContactDto> findByKeyword(String keyword) throws IOException ;
-
+  List<ContactDto> findByKeyword(String keyword) throws IOException;
 }

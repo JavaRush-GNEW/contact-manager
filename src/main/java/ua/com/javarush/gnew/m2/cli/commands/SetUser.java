@@ -11,8 +11,7 @@ import ua.com.javarush.gnew.m2.cli.CliCommand;
     mixinStandardHelpOptions = true,
     description = "Обрати активного корисувача")
 public class SetUser implements CliCommand {
-
-  @Parameters(index = "0", description = "Ім'я користувача", arity = "0..1")
+  @Parameters(index = "0", description = "Ім'я користувача", arity = "1")
   private String user;
 
   @Override
