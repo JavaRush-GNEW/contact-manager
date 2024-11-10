@@ -3,12 +3,11 @@ package ua.com.javarush.gnew.m2.cli.commands;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
 
+import java.io.IOException;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.utils.Utils;
-
-import java.io.IOException;
 
 @Command(
     name = "search",
