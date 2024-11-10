@@ -43,6 +43,7 @@ public class PhoneBookContext {
     addBean(EditContactMenu.class, new EditContactMenu());
     addBean(ListContacts.class, new ListContacts());
     addBean(SearchContact.class, new SearchContact());
+    addBean(SetLocale.class, new SetLocale());
     addBean(SetUser.class, new SetUser());
 
     try {

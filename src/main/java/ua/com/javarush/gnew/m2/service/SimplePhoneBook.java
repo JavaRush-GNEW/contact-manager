@@ -1,7 +1,6 @@
 package ua.com.javarush.gnew.m2.service;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
@@ -36,7 +35,7 @@ public class SimplePhoneBook implements PhoneBookInterface {
 
   @Override
   public List<ContactDto> list() {
-    return Collections.emptyList();
+    return contactDtoRepository.findAll();
   }
 
   @Override
