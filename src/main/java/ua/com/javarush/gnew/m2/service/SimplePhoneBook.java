@@ -9,17 +9,18 @@ import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.repository.ContactDtoRepository;
 
 public class SimplePhoneBook implements PhoneBookInterface {
+
   ContactDtoRepository contactDtoRepository = PhoneBookContext.getBean(ContactDtoRepository.class);
 
   @Override
-  public ContactDto add(ContactDto contactDto) {
-
+  public ContactDto add(ContactDto contactDto) throws IOException {
+    contactDtoRepository.save(contactDto);
     return contactDto;
   }
 
   @Override
-  public List<ContactDto> search(String str) {
-    return Collections.emptyList();
+  public List<ContactDto> search(String str) throws IOException {
+    return contactDtoRepository.findByKeyword(str);
   }
 
   @Override
@@ -35,11 +36,7 @@ public class SimplePhoneBook implements PhoneBookInterface {
 
   @Override
   public List<ContactDto> list() {
-    try {
-      return contactDtoRepository.findAll();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    return Collections.emptyList();
   }
 
   @Override
