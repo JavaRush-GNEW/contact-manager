@@ -17,25 +17,13 @@ public class SimplePhoneBook implements PhoneBookInterface {
 
   @Override
   public ContactDto add(ContactDto contactDto) throws IOException {
-    List<ContactDto> contacts = contactDtoRepository.findAll();
-    if (contactDto.getId() == 0) {
-      contactDto.setId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
-    }
-    contacts.add(contactDto);
-    contactDtoRepository.saveAll(contacts);
+    contactDtoRepository.save(contactDto);
     return contactDto;
   }
 
   @Override
   public List<ContactDto> search(String str) throws IOException {
-    List<ContactDto> contacts = contactDtoRepository.findAll();
-    return contacts.stream()
-            .filter(
-                    contact ->
-                            contact.getFullName().contains(str)
-                                    || contact.getPhones().stream().anyMatch(phones -> phones.contains(str))
-                                    || contact.getEmails().stream().anyMatch(emails -> emails.contains(str)))
-            .collect(Collectors.toList());
+    return contactDtoRepository.findByKeyword(str);
   }
 
   @Override
