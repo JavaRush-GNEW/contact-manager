@@ -44,13 +44,7 @@ class ContactMapperTest {
     // Given
     List<String> phoneStrings = Arrays.asList("123-456-7890", "098-765-4321");
     List<String> emailStrings = Arrays.asList("test@example.com", "test2@example.com");
-    ContactDto contactDto =
-        ContactDto.builder()
-            .id(1L)
-            .fullName("John Doe")
-            .phones(phoneStrings)
-            .emails(emailStrings)
-            .build();
+    ContactDto contactDto = new ContactDto(1L, "John Doe", phoneStrings, emailStrings);
     // When
     Contact contact = mapper.toEntity(contactDto);
 

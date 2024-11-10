@@ -18,7 +18,8 @@ import ua.com.javarush.gnew.m2.utils.Utils;
     aliases = {"-e", "--edit"},
     description = "Редагує існуючий контакт за ім'ям")
 public class EditContact implements CliCommand {
-  private final PhoneBookInterface phoneBookInterface;
+  private final PhoneBookInterface phoneBookInterface =
+      PhoneBookContext.getBean(PhoneBookInterface.class);
 
   Scanner scanner = new Scanner(System.in);
 
@@ -26,10 +27,6 @@ public class EditContact implements CliCommand {
 
   @Parameters(index = "0", description = "ID контакта", arity = "1")
   private long id;
-
-  public EditContact(PhoneBookInterface phoneBookInterface) {
-    this.phoneBookInterface = phoneBookInterface;
-  }
 
   @Override
   public Integer call() {
