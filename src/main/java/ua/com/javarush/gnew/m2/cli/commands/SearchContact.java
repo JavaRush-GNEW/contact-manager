@@ -3,6 +3,7 @@ package ua.com.javarush.gnew.m2.cli.commands;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
 
+import java.io.IOException;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
@@ -22,7 +23,7 @@ public class SearchContact implements CliCommand {
   private String name;
 
   @Override
-  public Integer call() {
+  public Integer call() throws IOException {
     Utils.printContactList(phoneBookInterface.search(name));
     return 0;
   }

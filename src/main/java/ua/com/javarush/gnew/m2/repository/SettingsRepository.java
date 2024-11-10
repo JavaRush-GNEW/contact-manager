@@ -6,7 +6,7 @@ import java.util.Map;
 public interface SettingsRepository {
   void save(Map<String, String> settings) throws IOException;
 
-  Map<String, String> load() throws IOException;
+  Map<String, String> load();
 
   void saveSingleSetting(String key, String value) throws IOException;
 

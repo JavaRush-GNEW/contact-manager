@@ -18,25 +18,22 @@ public class FileContactDtoRepository implements ContactDtoRepository {
   }
 
   @Override
-  public List<ContactDto> findAll() throws IOException {
-    List<ContactDto> result = new ArrayList<>();
+  public List<ContactDto> findAll() {
+    List<ContactDto> result;
     File file = new File(user + "book.st");
-    //        if(!file.exists()) return new ArrayList<>();
-
     try {
       result =
           objectMapper.readValue(
               file,
               objectMapper.getTypeFactory().constructCollectionType(List.class, ContactDto.class));
     } catch (IOException e) {
-      System.out.println(e);
       result = new ArrayList<>();
     }
     return result;
   }
 
   @Override
-  public Optional<ContactDto> findById(long id) throws IOException {
+  public Optional<ContactDto> findById(long id) {
     return findAll().stream().filter(contact -> contact.getId() == id).findFirst();
   }
 
@@ -63,7 +60,7 @@ public class FileContactDtoRepository implements ContactDtoRepository {
   }
 
   @Override
-  public List<ContactDto> findByKeyword(String keyword) throws IOException {
+  public List<ContactDto> findByKeyword(String keyword) {
     List<ContactDto> contacts = findAll();
     return contacts.stream()
         .filter(
