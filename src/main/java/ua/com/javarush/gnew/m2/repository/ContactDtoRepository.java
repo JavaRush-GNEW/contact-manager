@@ -7,7 +7,7 @@ import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 public interface ContactDtoRepository {
 
-  List<ContactDto> findAll() throws IOException;
+  List<ContactDto> findAll();
 
   Optional<ContactDto> findById(long id) throws IOException;
 
