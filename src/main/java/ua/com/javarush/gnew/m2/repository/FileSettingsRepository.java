@@ -18,7 +18,7 @@ public class FileSettingsRepository implements SettingsRepository {
   }
 
   @Override
-  public Map<String, String> load(){
+  public Map<String, String> load() {
     try {
       return objectMapper.readValue(
           new File("settings.st"), new TypeReference<Map<String, String>>() {});

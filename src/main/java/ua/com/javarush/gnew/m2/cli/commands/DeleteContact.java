@@ -5,8 +5,6 @@ import static picocli.CommandLine.Parameters;
 
 import java.io.IOException;
 import java.util.List;
-
-import lombok.SneakyThrows;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
@@ -25,16 +23,16 @@ public class DeleteContact implements CliCommand {
   @Parameters(index = "0", description = "ID контакта", arity = "1..*")
   private List<Long> listId;
 
-
   @Override
   public Integer call() throws IOException {
-    listId.forEach(id -> {
-      try {
-        phoneBookInterface.delete(id);
-      } catch (IOException e) {
-        System.err.println("Ошибка при удалении контакта с ID " + id + ": " + e.getMessage());
-      }
-    });
+    listId.forEach(
+        id -> {
+          try {
+            phoneBookInterface.delete(id);
+          } catch (IOException e) {
+            System.err.println("Ошибка при удалении контакта с ID " + id + ": " + e.getMessage());
+          }
+        });
     System.out.println("Контакт(и) видалено:");
     Utils.printContactList(phoneBookInterface.list());
     return 0;
