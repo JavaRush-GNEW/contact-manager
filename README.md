@@ -11,14 +11,14 @@
 
 ## Commands
 
-### General information:
+### General information
 
 ```
 -h, --help        Show this help message and exit.
 -V, --version     Print version information and exit.
 ```
 
-### Available commands:
+### Available commands
 
 ```
 -u, --user          Select active user.
@@ -29,7 +29,7 @@
 -ls, --list         Display all contacts.
 ```
 
-#### Usage:
+#### Usage
 
 ```
 phonebook [-hV] [COMMAND]
@@ -39,7 +39,7 @@ phonebook [-hV] [COMMAND]
 
 ### • user
 
-#### Usage:
+**Usage**
 
 ```
 phonebook --user/-u [-hV] [<name>]
@@ -47,7 +47,7 @@ phonebook --user/-u [-hV] [<name>]
   -h, --help      Show this help message and exit.
 ```
 
-#### Example:
+**Example**
 
 ```
 >java -jar phonebook.jar -u alex
@@ -57,7 +57,7 @@ phonebook --user/-u [-hV] [<name>]
 
 ### • add
 
-#### Usage:
+**Usage**
 
 ```
 phonebook --add/-a [-hV] -n=<name> -e[=<emails> [<emails> [<emails>]]] [-e
@@ -72,7 +72,7 @@ phonebook --add/-a [-hV] -n=<name> -e[=<emails> [<emails> [<emails>]]] [-e
   -g, --git=<gitAccount>                            GitHub account
 ```
 
-#### Example:
+**Example**
 
 ```
 >java -jar phonebook.jar -a -n "Jhon Snow" -p 123456789 22233333 -e 123@qq.ua 234@qq.ua -g JhonOnGit 
@@ -80,7 +80,7 @@ phonebook --add/-a [-hV] -n=<name> -e[=<emails> [<emails> [<emails>]]] [-e
 
 ### • search
 
-#### Usage:
+**Usage**
 
 ```
 phonebook --search/-s [-hV] [<name>]
@@ -88,7 +88,7 @@ phonebook --search/-s [-hV] [<name>]
   -h, --help      Show this help message and exit.
 ```
 
-#### Example:
+**Example**
 
 ```
 >java -jar phonebook.jar -s Chris
@@ -100,7 +100,7 @@ phonebook --search/-s [-hV] [<name>]
 
 ### • edit
 
-#### Usage:
+**Usage**
 
 ```
 phonebook --edit/-e [-hV] [<id>]
@@ -108,7 +108,7 @@ phonebook --edit/-e [-hV] [<id>]
   -h, --help    Show this help message and exit.
 ```
 
-#### Example:
+**Example**
 
 ```
 
@@ -143,7 +143,7 @@ phonebook --edit/-e [-hV] [<id>]
 
 ### • delete
 
-#### Usage:
+**Usage**
 
 ```
 phonebook --delete/-d [-hV] [<id>]
@@ -151,7 +151,7 @@ phonebook --delete/-d [-hV] [<id>]
   -h, --help    Show this help message and exit.
 ```
 
-#### Example:
+**Example**
 
 ```
 >java -jar phonebook.jar -ls
@@ -164,7 +164,7 @@ phonebook --delete/-d [-hV] [<id>]
 
 >java -jar phonebook.jar -d 12341 12342
 
-Контакт видалено: 
+Контакт видалено:
 | ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
 | 12340      | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              | 
 | 12343      | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com 
@@ -172,14 +172,14 @@ phonebook --delete/-d [-hV] [<id>]
 
 ### • list
 
-#### Usage:
+**Usage**
 
 ```
 phonebook --list/-ls [-hV]
   -h, --help      Show this help message and exit.
 ```
 
-#### Example:
+**Example**
 
 ```
 > java -jar phonebook.jar -ls
