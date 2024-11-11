@@ -37,9 +37,11 @@ phonebook [-hV] [COMMAND]
 
 ## Using commands
 
-### • user
+### User
 
-**Usage**
+---
+
+#### Usage
 
 ```
 phonebook --user/-u [-hV] [<name>]
@@ -47,17 +49,46 @@ phonebook --user/-u [-hV] [<name>]
   -h, --help      Show this help message and exit.
 ```
 
-**Example**
+#### Example
+
+```shell
+java -jar phonebook.jar -u alex
+```
 
 ```
->java -jar phonebook.jar -u alex
-
 Ви обрали користувача: alex
 ```
 
-### • add
+### List
 
-**Usage**
+---
+
+#### Usage
+
+```
+phonebook --list/-ls [-hV]
+  -h, --help      Show this help message and exit.
+```
+
+#### Example
+
+```shell
+java -jar phonebook.jar -ls
+```
+
+```
+| ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        |
+| 5072       | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              |
+| 335        | Chris Pratt          | FoxPartt        | +380673333333, +380674444444   | chris.p@m.ua, chris.p@gmail.com              |
+| 3790       | Scarlett Johansson   |                 | +380675555555, +380676666666   | Scarlett.j@m.ua, Scarlett.j@gmail.com        |
+| 2222       | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com            |
+```
+
+### Add
+
+---
+
+#### Usage
 
 ```
 phonebook --add/-a [-hV] -n=<name> -e[=<emails> [<emails> [<emails>]]] [-e
@@ -72,15 +103,17 @@ phonebook --add/-a [-hV] -n=<name> -e[=<emails> [<emails> [<emails>]]] [-e
   -g, --git=<gitAccount>                            GitHub account
 ```
 
-**Example**
+#### Example
 
+```shell
+java -jar phonebook.jar -a -n "Jhon Snow" -p 123456789 22233333 -e 123@qq.ua 234@qq.ua -g JhonOnGit 
 ```
->java -jar phonebook.jar -a -n "Jhon Snow" -p 123456789 22233333 -e 123@qq.ua 234@qq.ua -g JhonOnGit 
-```
 
-### • search
+### Search
 
-**Usage**
+---
+
+#### Usage
 
 ```
 phonebook --search/-s [-hV] [<name>]
@@ -88,19 +121,23 @@ phonebook --search/-s [-hV] [<name>]
   -h, --help      Show this help message and exit.
 ```
 
-**Example**
+#### Example
+
+```shell
+java -jar phonebook.jar -s Chris
+```
 
 ```
->java -jar phonebook.jar -s Chris
-
 | ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
 | 6728       | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              |
 | 9578       | Chris Pratt          | FoxPartt        | +380673333333, +380674444444   | chris.p@m.ua, chris.p@gmail.com              |
 ```
 
-### • edit
+### Edit
 
-**Usage**
+---
+
+#### Usage
 
 ```
 phonebook --edit/-e [-hV] [<id>]
@@ -108,20 +145,13 @@ phonebook --edit/-e [-hV] [<id>]
   -h, --help    Show this help message and exit.
 ```
 
-**Example**
+#### Example
 
+```shell
+java -jar phonebook.jar -e 2222
 ```
 
-> java -jar phonebook.jar -ls
- 
-| ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
-| 5072       | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              |
-| 335        | Chris Pratt          | FoxPartt        | +380673333333, +380674444444   | chris.p@m.ua, chris.p@gmail.com              |
-| 3790       | Scarlett Johansson   |                 | +380675555555, +380676666666   | Scarlett.j@m.ua, Scarlett.j@gmail.com        |
-| 2222       | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com            |
-
-> java -jar phonebook.jar -e 2222
-
+```
 | ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
 | 2222       | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com            |
 
@@ -141,9 +171,11 @@ phonebook --edit/-e [-hV] [<id>]
 
 ```
 
-### • delete
+### Delete
 
-**Usage**
+---
+
+#### Usage
 
 ```
 phonebook --delete/-d [-hV] [<id>]
@@ -151,42 +183,15 @@ phonebook --delete/-d [-hV] [<id>]
   -h, --help    Show this help message and exit.
 ```
 
-**Example**
+#### Example
+
+```shell
+java -jar phonebook.jar -d 12341 12342
+```
 
 ```
->java -jar phonebook.jar -ls
-
-| ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
-| 12340      | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              | 
-| 12341      | Chris Pratt          | FoxPartt        | +380673333333, +380674444444   | chris.p@m.ua, chris.p@gmail.com              | 
-| 12342      | Scarlett Johansson   |                 | +380675555555, +380676666666   | Scarlett.j@m.ua, Scarlett.j@gmail.com        | 
-| 12343      | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com    
-
->java -jar phonebook.jar -d 12341 12342
-
 Контакт видалено:
 | ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
 | 12340      | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              | 
 | 12343      | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com 
-```
-
-### • list
-
-**Usage**
-
-```
-phonebook --list/-ls [-hV]
-  -h, --help      Show this help message and exit.
-```
-
-**Example**
-
-```
-> java -jar phonebook.jar -ls
-
-| ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        |
-| 5072       | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              |
-| 335        | Chris Pratt          | FoxPartt        | +380673333333, +380674444444   | chris.p@m.ua, chris.p@gmail.com              |
-| 3790       | Scarlett Johansson   |                 | +380675555555, +380676666666   | Scarlett.j@m.ua, Scarlett.j@gmail.com        |
-| 2222       | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com            |
 ```
