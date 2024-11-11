@@ -190,4 +190,3 @@ phonebook --list/-ls [-hV]
 | 3790       | Scarlett Johansson   |                 | +380675555555, +380676666666   | Scarlett.j@m.ua, Scarlett.j@gmail.com        |
 | 2222       | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com            |
 ```
-
