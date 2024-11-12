@@ -17,9 +17,12 @@ public class ContactDto {
 
   private List<String> emails;
 
-  public ContactDto(String fullName, List<String> phones, List<String> emails) {
+  private String githubId;
+
+  public ContactDto(String fullName, List<String> phones, List<String> emails, String githubId) {
     this.fullName = fullName;
     this.phones = phones;
     this.emails = emails;
+    this.githubId = githubId;
   }
 }

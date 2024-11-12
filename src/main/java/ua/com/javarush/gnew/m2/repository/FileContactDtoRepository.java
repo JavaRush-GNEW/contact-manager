@@ -67,7 +67,8 @@ public class FileContactDtoRepository implements ContactDtoRepository {
             contact ->
                 contact.getFullName().contains(keyword)
                     || contact.getPhones().stream().anyMatch(phones -> phones.contains(keyword))
-                    || contact.getEmails().stream().anyMatch(emails -> emails.contains(keyword)))
+                    || contact.getEmails().stream().anyMatch(emails -> emails.contains(keyword))
+                    || (contact.getGithubId() != null && contact.getGithubId().contains(keyword)))
         .collect(Collectors.toList());
   }
 }

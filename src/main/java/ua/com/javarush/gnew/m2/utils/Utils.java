@@ -4,13 +4,14 @@ import java.util.List;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 
 public class Utils {
-  private static final String format = "| %-10s | %-20s | %-30s | %-45s| %n";
+  private static final String format = "| %-10s | %-20s | %-15s | %-30s | %-45s| %n";
 
   public static void printContactToTableRow(ContactDto contact) {
     System.out.format(
         format,
         contact.getId(),
         contact.getFullName(),
+        contact.getGithubId(),
         joining(contact.getPhones()),
         joining(contact.getEmails()));
   }
@@ -21,7 +22,7 @@ public class Utils {
   }
 
   private static void printContactHeaders() {
-    System.out.format(format, "ID", "FULL NAME", "PHONE", "EMAIL");
+    System.out.format(format, "ID", "FULL NAME", "GITHUB ID", "PHONE", "EMAIL");
   }
 
   public static String getFormattedStringFromContact(ContactDto contact) {
@@ -29,6 +30,7 @@ public class Utils {
         format,
         contact.getId(),
         contact.getFullName(),
+        contact.getGithubId(),
         joining(contact.getPhones()),
         joining(contact.getEmails()));
   }
