@@ -50,6 +50,12 @@ public class EditContactMenu implements CliCommand {
         contact.setEmails(emails);
         update(contact);
         break;
+      case "4":
+        System.out.print("4. Редагувати GitHub ID: ");
+        String stringGithubId = scanner.nextLine();
+        contact.setGithubId(stringGithubId);
+        update(contact);
+        break;
 
       default:
         System.out.println("Неправильний вибір. Спробуйте ще раз.");

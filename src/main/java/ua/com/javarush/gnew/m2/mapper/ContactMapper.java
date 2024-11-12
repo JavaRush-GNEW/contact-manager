@@ -8,6 +8,7 @@ import org.mapstruct.factory.Mappers;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.entity.Contact;
 import ua.com.javarush.gnew.m2.entity.Email;
+import ua.com.javarush.gnew.m2.entity.GitHubID;
 import ua.com.javarush.gnew.m2.entity.PhoneNumber;
 
 @Mapper
@@ -17,10 +18,12 @@ public interface ContactMapper {
 
   @Mapping(target = "phones", source = "phones")
   @Mapping(target = "emails", source = "emails")
+  @Mapping(target = "githubId", source = "githubId")
   ContactDto toDto(Contact contactEntity);
 
   @Mapping(target = "phones", source = "phones")
   @Mapping(target = "emails", source = "emails")
+  @Mapping(target = "githubId", source = "githubId")
   Contact toEntity(ContactDto contactDto);
 
   default List<String> mapPhonesToStrings(List<PhoneNumber> phones) {
@@ -37,5 +40,13 @@ public interface ContactMapper {
 
   default List<Email> mapStringsToEmails(List<String> emailStrings) {
     return emailStrings.stream().map(Email::new).collect(Collectors.toList());
+  }
+
+  default String mapGitHubIdToString(GitHubID githubId) {
+    return githubId.getGithubId();
+  }
+
+  default GitHubID mapStringToGitHubId(String githubId) {
+    return githubId != null ? new GitHubID(githubId) : null;
   }
 }

@@ -12,9 +12,13 @@ public interface ContactEntity {
 
   List<Email> getEmails();
 
+  GitHubID getGitHubID();
+
   void setFullName(String fullName);
 
   void setPhones(List<PhoneNumber> phones);
 
   void setEmails(List<Email> emails);
+
+  void setGitHubID(GitHubID gitHubID);
 }

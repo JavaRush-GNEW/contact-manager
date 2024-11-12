@@ -12,4 +12,6 @@ public class Contact {
   private List<PhoneNumber> phones;
 
   private List<Email> emails;
+
+  private String githubId;
 }

@@ -43,10 +43,11 @@ public class EditContact implements CliCommand {
         System.out.println("1. Редагувати iм'я");
         System.out.println("2. Редагувати телефони");
         System.out.println("3. Редагувати email");
-        System.out.println("4. Вийти");
+        System.out.println("4. Редагувати GitHub ID");
+        System.out.println("5. Вийти");
         System.out.print("Ваш вибiр: ");
         choice = scanner.nextLine();
-        if (choice.equals("4")) return 0;
+        if (choice.equals("5")) return 0;
         EditContactMenu editContactMenu = PhoneBookContext.getBean(EditContactMenu.class);
         editContactMenu.setContact(contactDto);
         new CommandLine(editContactMenu).execute(choice);

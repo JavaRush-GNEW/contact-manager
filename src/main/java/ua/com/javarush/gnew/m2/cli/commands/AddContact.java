@@ -39,10 +39,16 @@ public class AddContact implements CliCommand {
       arity = "0..3")
   private List<String> emails;
 
+  @Option(
+      names = {"-g", "--github"},
+      description = "GitHub ID",
+      required = false)
+  private String githubId;
+
   @Override
   public Integer call() {
     try {
-      ContactDto newContactDto = new ContactDto(name, phones, emails);
+      ContactDto newContactDto = new ContactDto(name, phones, emails, githubId);
       ContactDto savedContactDto = phoneBookInterface.add(newContactDto);
       System.out.println("Контакт додано: ");
       Utils.printContactList(List.of(savedContactDto));
