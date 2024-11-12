@@ -4,6 +4,8 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e34fd4467d234fcaab31765bc99e14a6)](https://app.codacy.com/gh/JavaRush-GNEW/contact-manager/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
+[**GUIDE**: How to Contribute to the Contact Manager project](https://github.com/JavaRush-GNEW/contact-manager/wiki/How-to-Contribute-%E2%80%90-Guide)
+
 ## About the project
 
 > Contact Manager is a CLI application for managing contacts in your phone book. It allows you to add, search, edit,
