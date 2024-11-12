@@ -47,6 +47,6 @@ public interface ContactMapper {
   }
 
   default GitHubID mapStringToGitHubId(String githubId) {
-    return new GitHubID(githubId);
+    return githubId != null ? new GitHubID(githubId) : null;
   }
 }
