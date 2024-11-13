@@ -3,6 +3,7 @@ package ua.com.javarush.gnew.m2.cli.commands;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Option;
 
+import java.util.ArrayList;
 import java.util.List;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
@@ -28,21 +29,19 @@ public class AddContact implements CliCommand {
   @Option(
       names = {"-p", "--phone"},
       description = "Номер телефону",
-      required = true,
       arity = "0..3")
-  private List<String> phones;
+  private List<String> phones = new ArrayList<>();
 
   @Option(
       names = {"-e", "--email"},
       description = "Електронна пошта",
-      required = true,
       arity = "0..3")
-  private List<String> emails;
+  private List<String> emails = new ArrayList<>();
 
   @Option(
       names = {"-g", "--github"},
       description = "GitHub ID",
-      required = false)
+      defaultValue = "")
   private String githubId;
 
   @Override
@@ -55,6 +54,8 @@ public class AddContact implements CliCommand {
 
     } catch (Exception e) {
       System.out.println("Помилка, невірний формат: " + name);
+
+      throw new RuntimeException(e);
     }
     return 0;
   }

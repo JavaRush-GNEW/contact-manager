@@ -19,7 +19,7 @@ public class SearchContact implements CliCommand {
   private final PhoneBookInterface phoneBookInterface =
       PhoneBookContext.getBean(PhoneBookInterface.class);
 
-  @Parameters(index = "0", description = "Фраза для пошуку", arity = "0..1")
+  @Parameters(index = "0", description = "Фраза для пошуку", arity = "1")
   private String name;
 
   @Override
