@@ -52,10 +52,14 @@ public class FileContactDtoRepository implements ContactDtoRepository {
   @Override
   public void save(ContactDto contactDto) throws IOException {
     List<ContactDto> contacts = findAll();
-    if (contactDto.getId() == 0) {
+    Optional<ContactDto> optional =
+        contacts.stream().filter(c -> c.getId() == contactDto.getId()).findFirst();
+    if (optional.isEmpty()) {
       contactDto.setId((long) (Math.random() * 10000));
+      contacts.add(contactDto);
+    } else {
+      contacts.set(contacts.indexOf(optional.get()), contactDto);
     }
-    contacts.add(contactDto);
     saveAll(contacts);
   }
 
