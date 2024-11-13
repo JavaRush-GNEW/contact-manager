@@ -4,6 +4,7 @@ import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import ua.com.javarush.gnew.m2.cli.CliCommand;
 import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
@@ -21,7 +22,7 @@ public class DeleteContact implements CliCommand {
       PhoneBookContext.getBean(PhoneBookInterface.class);
 
   @Parameters(index = "0", description = "ID контакта", arity = "1..*")
-  private List<Long> listId;
+  private List<Long> listId = new ArrayList<>();
 
   @Override
   public Integer call() throws IOException {
