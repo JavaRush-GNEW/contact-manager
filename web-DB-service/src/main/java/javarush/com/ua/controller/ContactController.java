@@ -4,6 +4,7 @@ import javarush.com.ua.dto.ContactDto;
 import javarush.com.ua.entity.ContactEntity;
 import javarush.com.ua.repository.ContactDtoRepository;
 import javarush.com.ua.service.ContactService;
+import javarush.com.ua.service.SequenceGeneratorService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,53 +18,60 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ContactController {
 
-    private final ContactDtoRepository contactDtoRepository;
+  private final ContactDtoRepository contactDtoRepository;
 
-    private final ContactService contactService;
+  private final ContactService contactService;
 
-    private final ModelMapper modelMapper;
+  private final ModelMapper modelMapper;
+  private final SequenceGeneratorService sequenceGeneratorService;
 
+  @GetMapping
+  public Flux<ContactDto> getAllContats(@AuthenticationPrincipal Mono<UserDetails> currentUser) {
+    return currentUser
+        .map(UserDetails::getUsername)
+        .flatMapMany(contactDtoRepository::findAllByUser)
+        .map(this::convertToContactDto);
+  }
 
-    @GetMapping
-    public Flux<ContactDto> getAllContats(@AuthenticationPrincipal Mono<UserDetails> currentUser) {    return currentUser
-            .map(UserDetails::getUsername)
-            .flatMapMany(contactDtoRepository::findAllByUser)
-            .map(this::convertToContactDto);
-    }
-    @PostMapping
-    public Mono<ContactDto> createContact(@AuthenticationPrincipal Mono<UserDetails> currentUser,
-                                       @RequestBody ContactDto contact) {
-        return currentUser
-                .map(UserDetails::getUsername)
-                .flatMap(username -> {
-                    var entity= convertToContactEntity(contact);
-                    entity.setUser(username);
-                    return contactDtoRepository.save(entity)
-                            .map(this::convertToContactDto);
-                });
-    }
+  @PostMapping
+  public Mono<ContactDto> createContact(
+      @AuthenticationPrincipal Mono<UserDetails> currentUser, @RequestBody ContactDto contact) {
+    return currentUser
+        .map(UserDetails::getUsername)
+        .flatMap(
+            username -> {
+              var entity = convertToContactEntity(contact);
+              entity.setUser(username);
+              return sequenceGeneratorService
+                  .generateSequence("contact_sequence")
+                  .flatMap(
+                      sequence -> {
+                        entity.setId(sequence);
+                        return contactDtoRepository.save(entity).map(this::convertToContactDto);
+                      });
+            });
+  }
 
-    @GetMapping("/{id}")
-    public Mono<ContactDto> getContactById(@PathVariable String id) {
-        return contactDtoRepository.findById(id)
-                .map(this::convertToContactDto);
-    }
+  @GetMapping("/{id}")
+  public Mono<ContactDto> getContactById(@PathVariable Long id) {
+    return contactDtoRepository.findById(id).map(this::convertToContactDto);
+  }
 
-    @DeleteMapping("/{id}")
-    public Mono<Void> delContactById(@PathVariable String id) {
-        return contactDtoRepository.deleteById(id);
-    }
+  @DeleteMapping("/{id}")
+  public Mono<Void> delContactById(@PathVariable Long id) {
+    return contactDtoRepository.deleteById(id);
+  }
 
-    @GetMapping("/search")
-    public Flux<ContactDto> searchContacts(@RequestParam String search) {
-        return contactService.searchContacts(search)
-                .map(this::convertToContactDto);
-    }
+  @GetMapping("/search")
+  public Flux<ContactDto> searchContacts(@RequestParam String search) {
+    return contactService.searchContacts(search).map(this::convertToContactDto);
+  }
 
-    private ContactDto convertToContactDto(ContactEntity deviceEntity) {
-        return modelMapper.map(deviceEntity, ContactDto.class);
-    }
-    private ContactEntity convertToContactEntity(ContactDto deviceEntity) {
-        return modelMapper.map(deviceEntity, ContactEntity.class);
-    }
+  private ContactDto convertToContactDto(ContactEntity deviceEntity) {
+    return modelMapper.map(deviceEntity, ContactDto.class);
+  }
+
+  private ContactEntity convertToContactEntity(ContactDto deviceEntity) {
+    return modelMapper.map(deviceEntity, ContactEntity.class);
+  }
 }

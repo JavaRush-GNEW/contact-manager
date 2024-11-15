@@ -6,10 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 import ua.com.javarush.gnew.m2.cli.PhoneBookCLI;
 import ua.com.javarush.gnew.m2.cli.commands.*;
-import ua.com.javarush.gnew.m2.repository.ContactDtoRepository;
-import ua.com.javarush.gnew.m2.repository.FileContactDtoRepository;
-import ua.com.javarush.gnew.m2.repository.FileSettingsRepository;
-import ua.com.javarush.gnew.m2.repository.SettingsRepository;
+import ua.com.javarush.gnew.m2.repository.*;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 import ua.com.javarush.gnew.m2.service.SettingsService;
 import ua.com.javarush.gnew.m2.service.SettingsServiceInterface;
@@ -22,12 +19,17 @@ public class PhoneBookContext {
   public static void create() throws IOException {
 
     SettingsRepository settingsRepository = new FileSettingsRepository();
+
+
     Optional<String> optionalUser =
         Optional.ofNullable(settingsRepository.loadSingleSetting("user"));
+
     addBean(SettingsRepository.class, settingsRepository);
 
     ContactDtoRepository contactDtoRepository =
-        new FileContactDtoRepository(optionalUser.orElse("tester"));
+        //        new FileContactDtoRepository(optionalUser.orElse("tester"));
+        new RestContactDtoRepository(optionalUser.orElse("tester"));
+
     addBean(ContactDtoRepository.class, contactDtoRepository);
 
     PhoneBookInterface phoneBook = new SimplePhoneBook();

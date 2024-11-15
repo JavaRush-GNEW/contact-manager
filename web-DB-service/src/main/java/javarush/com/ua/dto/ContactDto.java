@@ -16,7 +16,7 @@ import java.util.List;
 @Document
 public class ContactDto {
   @Id
-  private String id;
+  private Long id;
 
   private String fullName;
 

@@ -15,7 +15,7 @@ import java.util.List;
 @Document
 public class ContactEntity {
     @Id
-    private String id;
+    private Long id;
 
     private String user;
 
