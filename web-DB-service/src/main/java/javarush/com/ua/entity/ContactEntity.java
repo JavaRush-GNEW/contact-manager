@@ -1,4 +1,4 @@
-package javarush.com.ua.dto;
+package javarush.com.ua.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,24 +6,24 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.List;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
-public class ContactDto {
-  @Id
-  private String id;
+public class ContactEntity {
+    @Id
+    private String id;
 
-  private String fullName;
+    private String user;
 
-  private List<String> phones;
+    private String fullName;
 
-  private List<String> emails;
+    private List<String> phones;
 
-  private String githubId;
+    private List<String> emails;
 
- }
+    private String githubId;
+}

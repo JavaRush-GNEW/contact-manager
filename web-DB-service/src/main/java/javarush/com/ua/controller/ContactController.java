@@ -1,10 +1,11 @@
 package javarush.com.ua.controller;
 
 import javarush.com.ua.dto.ContactDto;
-import javarush.com.ua.entity.User;
+import javarush.com.ua.entity.ContactEntity;
 import javarush.com.ua.repository.ContactDtoRepository;
 import javarush.com.ua.service.ContactService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +21,14 @@ public class ContactController {
 
     private final ContactService contactService;
 
+    private final ModelMapper modelMapper;
+
+
     @GetMapping
     public Flux<ContactDto> getAllContats(@AuthenticationPrincipal Mono<UserDetails> currentUser) {    return currentUser
             .map(UserDetails::getUsername)
-            .flatMapMany(contactDtoRepository::findAllByUser);
+            .flatMapMany(contactDtoRepository::findAllByUser)
+            .map(this::convertToContactDto);
     }
     @PostMapping
     public Mono<ContactDto> createContact(@AuthenticationPrincipal Mono<UserDetails> currentUser,
@@ -31,14 +36,17 @@ public class ContactController {
         return currentUser
                 .map(UserDetails::getUsername)
                 .flatMap(username -> {
-                    contact.setUser(username);
-                    return contactDtoRepository.save(contact);
+                    var entity= convertToContactEntity(contact);
+                    entity.setUser(username);
+                    return contactDtoRepository.save(entity)
+                            .map(this::convertToContactDto);
                 });
     }
 
     @GetMapping("/{id}")
     public Mono<ContactDto> getContactById(@PathVariable String id) {
-        return contactDtoRepository.findById(id);
+        return contactDtoRepository.findById(id)
+                .map(this::convertToContactDto);
     }
 
     @DeleteMapping("/{id}")
@@ -48,6 +56,14 @@ public class ContactController {
 
     @GetMapping("/search")
     public Flux<ContactDto> searchContacts(@RequestParam String search) {
-        return contactService.searchContacts(search);
+        return contactService.searchContacts(search)
+                .map(this::convertToContactDto);
+    }
+
+    private ContactDto convertToContactDto(ContactEntity deviceEntity) {
+        return modelMapper.map(deviceEntity, ContactDto.class);
+    }
+    private ContactEntity convertToContactEntity(ContactDto deviceEntity) {
+        return modelMapper.map(deviceEntity, ContactEntity.class);
     }
 }

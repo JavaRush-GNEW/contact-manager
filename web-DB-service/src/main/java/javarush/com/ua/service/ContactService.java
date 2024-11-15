@@ -1,6 +1,6 @@
 package javarush.com.ua.service;
 
-import javarush.com.ua.dto.ContactDto;
+import javarush.com.ua.entity.ContactEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -14,11 +14,7 @@ public class ContactService {
 
     private final ReactiveMongoTemplate mongoTemplate;
 
-//    public ContactService(ReactiveMongoTemplate mongoTemplate) {
-//        this.mongoTemplate = mongoTemplate;
-//    }
-
-    public Flux<ContactDto> searchContacts(String searchTerm) {
+    public Flux<ContactEntity> searchContacts(String searchTerm) {
         // Побудова критеріїв для пошуку по всіх полях
         Criteria criteria = new Criteria().orOperator(
                 Criteria.where("fullName").regex(searchTerm, "i"),
@@ -29,7 +25,7 @@ public class ContactService {
 
         Query query = new Query(criteria);
 
-        return mongoTemplate.find(query, ContactDto.class);
+        return mongoTemplate.find(query, ContactEntity.class);
     }
 }
 
