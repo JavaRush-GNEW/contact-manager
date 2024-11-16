@@ -52,6 +52,19 @@ public class ContactController {
             });
   }
 
+  @PutMapping
+  public Mono<ContactDto> updateContact(
+      @AuthenticationPrincipal Mono<UserDetails> currentUser, @RequestBody ContactDto contact) {
+    return currentUser
+        .map(UserDetails::getUsername)
+        .flatMap(
+            username -> {
+              var entity = convertToContactEntity(contact);
+              entity.setUser(username);
+              return contactDtoRepository.save(entity).map(this::convertToContactDto);
+            });
+  }
+
   @GetMapping("/{id}")
   public Mono<ContactDto> getContactById(@PathVariable Long id) {
     return contactDtoRepository.findById(id).map(this::convertToContactDto);

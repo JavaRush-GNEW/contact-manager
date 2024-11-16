@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+<h1>Contacts List for {{user}}</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>GitHub ID</th>
+        <th>Phones</th>
+        <th>Emails</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#contacts}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{fullName}}</td>
+            <td>{{githubId}}</td>
+            <td>{{phones}}</td>
+            <td>{{emails}}</td>
+        </tr>
+    {{/contacts}}
+    </tbody>
+</table>
+</body>
+</html>

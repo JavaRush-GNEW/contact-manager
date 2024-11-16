@@ -1,4 +1,6 @@
 package javarush.com.ua.configuration;
+import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -20,9 +22,12 @@ public class SecurityConfig {
                         .pathMatchers("/public/**").permitAll()
                         .anyExchange().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults());
+                .httpBasic(Customizer.withDefaults())
+                .redirectToHttps(Customizer.withDefaults()); // Redirect HTTP to HTTPS using defaults
         return http.build();
     }
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

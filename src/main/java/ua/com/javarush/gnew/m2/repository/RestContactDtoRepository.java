@@ -1,95 +1,132 @@
 package ua.com.javarush.gnew.m2.repository;
 
-import ua.com.javarush.gnew.m2.dto.ContactDto;
-
-import javax.ws.rs.client.*;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import javax.ws.rs.client.*;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import ua.com.javarush.gnew.m2.dto.ContactDto;
 
-public class RestContactDtoRepository implements ContactDtoRepository{
-    String url = "http://localhost:8080/contacts";
-    Client client = ClientBuilder.newClient();
+public class RestContactDtoRepository implements ContactDtoRepository {
+  //    String url = "http://localhost:8080/contacts";
+  String url = "https://194.28.85.113:8585/contacts";
 
-    private final String user;
+  Client client;
 
-    public RestContactDtoRepository(String user) {
-        this.user = user;
+  private final String user;
+
+  String basicAuth;
+
+  public RestContactDtoRepository(String user) {
+    this.user = user;
+    basicAuth = "Basic " + Base64.getEncoder().encodeToString((user + ":" + "12345").getBytes());
+    try {
+      sendSettingsInit();
+    } catch (NoSuchAlgorithmException e) {
+      throw new RuntimeException(e);
+    } catch (KeyManagementException e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    @Override
-    public List<ContactDto> findAll() {
-        WebTarget target = client.target(url);
+  private void sendSettingsInit() throws NoSuchAlgorithmException, KeyManagementException {
+    SSLContext sslContext = SSLContext.getInstance("TLS");
+    TrustManager[] trustAllCerts =
+        new TrustManager[] {
+          new X509TrustManager() {
+            public X509Certificate[] getAcceptedIssuers() {
+              return null;
+            }
 
-        String basicAuth = "Basic " + Base64.getEncoder()
-                .encodeToString(( user + ":" + "12345").getBytes());
+            public void checkClientTrusted(X509Certificate[] certs, String authType) {}
 
-        Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON)
-                .header("Authorization", basicAuth);
-        List<ContactDto> devices = invocationBuilder.get(new GenericType<List<ContactDto>>() {});
+            public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+          }
+        };
+    sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
 
-        return devices;
-    }
+    client =
+        ClientBuilder.newBuilder()
+            .sslContext(sslContext)
+            .register(JacksonFeature.class) // Реєстрація Jackson для JSON
+            .hostnameVerifier((hostname, session) -> true) // Ігнорування перевірки хоста
+            .build();
+  }
 
-    @Override
-    public Optional<ContactDto> findById(long id) throws IOException {
-        return Optional.empty();
-    }
+  @Override
+  public List<ContactDto> findAll() {
+    WebTarget target = client.target(url);
 
-    @Override
-    public void deleteById(long id) throws IOException {
-        WebTarget target = client.target(url).path(String.valueOf(id));
+    Invocation.Builder invocationBuilder =
+        target.request(MediaType.APPLICATION_JSON).header("Authorization", basicAuth);
+    List<ContactDto> devices = invocationBuilder.get(new GenericType<List<ContactDto>>() {});
 
-        String basicAuth = "Basic " + Base64.getEncoder()
-                .encodeToString(( user + ":" + "12345").getBytes());
+    return devices;
+  }
 
-        Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON)
-                .header("Authorization", basicAuth);
+  @Override
+  public Optional<ContactDto> findById(long id) throws IOException {
+    WebTarget target = client.target(url).path(String.valueOf(id));
 
-        ContactDto contact = invocationBuilder.delete(ContactDto.class);
+    Invocation.Builder invocationBuilder =
+        target.request(MediaType.APPLICATION_JSON).header("Authorization", basicAuth);
 
-    }
+    ContactDto contact = invocationBuilder.get(ContactDto.class);
 
-    @Override
-    public void saveAll(List<ContactDto> contacts) throws IOException {
+    return Optional.ofNullable(contact);
+  }
 
-    }
+  @Override
+  public void deleteById(long id) throws IOException {
+    WebTarget target = client.target(url).path(String.valueOf(id));
 
-    @Override
-    public void save(ContactDto contactDto) throws IOException {
+    Invocation.Builder invocationBuilder =
+        target.request(MediaType.APPLICATION_JSON).header("Authorization", basicAuth);
 
-        WebTarget target = client.target(url);
+    ContactDto contact = invocationBuilder.delete(ContactDto.class);
+  }
 
-        String basicAuth = "Basic " + Base64.getEncoder()
-                .encodeToString(( user + ":" + "12345").getBytes());
+  @Override
+  public void saveAll(List<ContactDto> contacts) throws IOException {}
 
-        Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON)
-                .header("Authorization", basicAuth);
-       ContactDto contact = invocationBuilder.post(Entity.entity(contactDto,MediaType.APPLICATION_JSON),ContactDto.class);
+  @Override
+  public void save(ContactDto contactDto) throws IOException {
 
-       contactDto.setId(contact.getId());
-       contactDto.setFullName(contact.getFullName());
-       contactDto.setPhones(contact.getPhones());
-       contactDto.setEmails(contact.getEmails());
-       contactDto.setGithubId(contact.getGithubId());
+    WebTarget target = client.target(url);
 
-    }
+    Invocation.Builder invocationBuilder =
+        target.request(MediaType.APPLICATION_JSON).header("Authorization", basicAuth);
 
-    @Override
-    public List<ContactDto> findByKeyword(String keyword) throws IOException {
-        WebTarget target = client.target(url+"/search")
-                .queryParam("search",keyword);
+    ContactDto contact =
+        (contactDto.getId() == 0)
+            ? invocationBuilder.post(
+                Entity.entity(contactDto, MediaType.APPLICATION_JSON), ContactDto.class)
+            : invocationBuilder.put(
+                Entity.entity(contactDto, MediaType.APPLICATION_JSON), ContactDto.class);
 
-        String basicAuth = "Basic " + Base64.getEncoder()
-                .encodeToString(( user + ":" + "12345").getBytes());
+    contactDto.setId(contact.getId());
+    contactDto.setFullName(contact.getFullName());
+    contactDto.setPhones(contact.getPhones());
+    contactDto.setEmails(contact.getEmails());
+    contactDto.setGithubId(contact.getGithubId());
+  }
 
-        Invocation.Builder invocationBuilder = target.request(MediaType.APPLICATION_JSON)
-                .header("Authorization", basicAuth);
-        List<ContactDto> devices = invocationBuilder.get(new GenericType<List<ContactDto>>() {});
-        return devices;
-    }
+  @Override
+  public List<ContactDto> findByKeyword(String keyword) throws IOException {
+    WebTarget target = client.target(url + "/search").queryParam("search", keyword);
+
+    Invocation.Builder invocationBuilder =
+        target.request(MediaType.APPLICATION_JSON).header("Authorization", basicAuth);
+    List<ContactDto> devices = invocationBuilder.get(new GenericType<List<ContactDto>>() {});
+    return devices;
+  }
 }

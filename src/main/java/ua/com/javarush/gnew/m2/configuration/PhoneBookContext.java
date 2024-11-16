@@ -20,7 +20,6 @@ public class PhoneBookContext {
 
     SettingsRepository settingsRepository = new FileSettingsRepository();
 
-
     Optional<String> optionalUser =
         Optional.ofNullable(settingsRepository.loadSingleSetting("user"));
 
@@ -53,6 +52,10 @@ public class PhoneBookContext {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+
+    System.out.println();
+    System.out.println("Hello " + optionalUser.orElse("tester"));
+    System.out.println();
   }
 
   private static void addBean(Class clazz, Object object) {
