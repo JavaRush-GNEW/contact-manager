@@ -12,7 +12,7 @@ public class LocalizationService {
     }
 
     public void setLocale(Locale locale) {
-        this.resourceBundle = ResourceBundle.getBundle("messages", locale);  // messages.properties для каждого языка
+        this.resourceBundle = ResourceBundle.getBundle("messages", locale);
     }
 
     public String getMessage(String key) {
