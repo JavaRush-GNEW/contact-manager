@@ -11,9 +11,11 @@ public class LocalizationService {
         setLocale(locale);
     }
 
+
     public void setLocale(Locale locale) {
         this.resourceBundle = ResourceBundle.getBundle("messages", locale);
     }
+
 
     public String getMessage(String key) {
         try {
