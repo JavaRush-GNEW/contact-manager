@@ -50,7 +50,7 @@ public class FileContactDtoRepository implements ContactDtoRepository {
   }
 
   @Override
-  public void save(ContactDto contactDto) throws IOException {
+  public ContactDto save(ContactDto contactDto) throws IOException {
     List<ContactDto> contacts = findAll();
     Optional<ContactDto> optional =
         contacts.stream().filter(c -> c.getId() == contactDto.getId()).findFirst();
@@ -61,6 +61,7 @@ public class FileContactDtoRepository implements ContactDtoRepository {
       contacts.set(contacts.indexOf(optional.get()), contactDto);
     }
     saveAll(contacts);
+    return contactDto;
   }
 
   @Override
