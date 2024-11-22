@@ -7,8 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection = "counters")
 public class Counter {
-    @Id
-    private String id; // Ім'я лічильника
-    private Long sequence;
-
+  @Id private String id; // Ім'я лічильника
+  private Long sequence;
 }

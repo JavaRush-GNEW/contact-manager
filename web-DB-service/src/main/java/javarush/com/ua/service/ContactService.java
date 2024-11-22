@@ -12,20 +12,20 @@ import reactor.core.publisher.Flux;
 @RequiredArgsConstructor
 public class ContactService {
 
-    private final ReactiveMongoTemplate mongoTemplate;
+  private final ReactiveMongoTemplate mongoTemplate;
 
-    public Flux<ContactEntity> searchContacts(String searchTerm) {
-        // Побудова критеріїв для пошуку по всіх полях
-        Criteria criteria = new Criteria().orOperator(
+  public Flux<ContactEntity> searchContacts(String searchTerm) {
+    // Побудова критеріїв для пошуку по всіх полях
+    Criteria criteria =
+        new Criteria()
+            .orOperator(
                 Criteria.where("fullName").regex(searchTerm, "i"),
                 Criteria.where("phones").in(searchTerm),
                 Criteria.where("emails").in(searchTerm),
-                Criteria.where("githubId").regex(searchTerm, "i")
-        );
+                Criteria.where("githubId").regex(searchTerm, "i"));
 
-        Query query = new Query(criteria);
+    Query query = new Query(criteria);
 
-        return mongoTemplate.find(query, ContactEntity.class);
-    }
+    return mongoTemplate.find(query, ContactEntity.class);
+  }
 }
-

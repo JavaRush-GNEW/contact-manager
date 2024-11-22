@@ -1,5 +1,6 @@
 package javarush.com.ua.controller;
 
+import java.util.stream.Collectors;
 import javarush.com.ua.dto.ContactDto;
 import javarush.com.ua.entity.ContactEntity;
 import javarush.com.ua.repository.ContactDtoRepository;
@@ -12,12 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/gui")

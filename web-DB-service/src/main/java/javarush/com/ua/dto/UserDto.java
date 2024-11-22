@@ -1,14 +1,11 @@
 package javarush.com.ua.dto;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class UserDto {
-    private String username;
-    private String password;
-    private List<String> roles;
-
+  private String username;
+  private String password;
+  private List<String> roles;
 }
-

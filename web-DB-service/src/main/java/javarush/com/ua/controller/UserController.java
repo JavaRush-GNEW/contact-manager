@@ -11,17 +11,18 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/public/users")
 public class UserController {
 
-    private final UserService userService;
+  private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+  @Autowired
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
-    @PostMapping
-    public Mono<ResponseEntity<String>> createUser(@RequestBody UserDto userDto) {
-        return userService.createUser(userDto)
-                .map(user -> ResponseEntity.ok("User created successfully"))
-                .onErrorResume(e -> Mono.just(ResponseEntity.badRequest().body(e.getMessage())));
-    }
+  @PostMapping
+  public Mono<ResponseEntity<String>> createUser(@RequestBody UserDto userDto) {
+    return userService
+        .createUser(userDto)
+        .map(user -> ResponseEntity.ok("User created successfully"))
+        .onErrorResume(e -> Mono.just(ResponseEntity.badRequest().body(e.getMessage())));
+  }
 }
