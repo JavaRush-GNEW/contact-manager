@@ -5,23 +5,21 @@ import java.util.ResourceBundle;
 
 public class LocalizationService {
 
-    private ResourceBundle resourceBundle;
+  private ResourceBundle resourceBundle;
 
-    public LocalizationService(Locale locale) {
-        setLocale(locale);
+  public LocalizationService(Locale locale) {
+    setLocale(locale);
+  }
+
+  public void setLocale(Locale locale) {
+    this.resourceBundle = ResourceBundle.getBundle("messages", locale);
+  }
+
+  public String getMessage(String key) {
+    try {
+      return resourceBundle.getString(key);
+    } catch (Exception e) {
+      return "Message not found for key: " + key;
     }
-
-
-    public void setLocale(Locale locale) {
-        this.resourceBundle = ResourceBundle.getBundle("messages", locale);
-    }
-
-
-    public String getMessage(String key) {
-        try {
-            return resourceBundle.getString(key);
-        } catch (Exception e) {
-            return "Message not found for key: " + key;
-        }
-    }
+  }
 }
