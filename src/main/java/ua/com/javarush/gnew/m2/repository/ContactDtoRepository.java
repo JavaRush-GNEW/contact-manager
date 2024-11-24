@@ -15,7 +15,7 @@ public interface ContactDtoRepository {
 
   void saveAll(List<ContactDto> contacts) throws IOException;
 
-  void save(ContactDto contactDto) throws IOException;
+  ContactDto save(ContactDto contactDto) throws IOException;
 
   List<ContactDto> findByKeyword(String keyword) throws IOException;
 }
