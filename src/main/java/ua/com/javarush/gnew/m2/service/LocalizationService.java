@@ -18,6 +18,7 @@ public class LocalizationService {
     }
 
 
+
     public String getMessage(String key) {
         try {
             String message = resourceBundle.getString(key);
