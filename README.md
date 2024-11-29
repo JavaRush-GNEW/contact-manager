@@ -29,6 +29,7 @@
 -e, --edit          Edit existing contact by ID.
 -d, --delete        Delete contact by ID.
 -ls, --list         Display all contacts.
+-gr, --group        Create,delete group. Add, remove contact from group.
 ```
 
 #### Usage
@@ -189,6 +190,36 @@ phonebook --delete/-d [-hV] [<id>]
 
 ```shell
 java -jar phonebook.jar -d 12341 12342
+```
+
+```
+Контакт видалено:
+| ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
+| 12340      | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              | 
+| 12343      | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com 
+```
+
+### Group
+
+---
+
+#### Usage
+
+```
+phonebook --group/-gr [-hV] 
+  -c, --create=<group>                           Create new grop
+  -d, --delete=<group>                           Delete group     
+  -a, --add=<group> [=<id> [<id> [<id>]]]        Add contacts to group  
+  -rm --remove=<group> [=<id> [<id> [<id>]]]
+  -h, --help                                    Show this help message and exit.
+```
+
+#### Example
+
+```shell
+java -jar phonebook.jar -gr -c "Marvel"
+java -jar phonebook.jar -gr -a "Marvel" 12340 12343 
+
 ```
 
 ```
