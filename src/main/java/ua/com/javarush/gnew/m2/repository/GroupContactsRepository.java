@@ -7,11 +7,11 @@ public interface GroupContactsRepository {
 
   String delete(String group);
 
-  String addContact(String group, long id);
+  boolean addContact(String group, long id);
 
-  String deleteContact(String group, long id);
+  boolean deleteContact(String group, long id);
 
   List<String> getGroups();
 
-  List<String> getContactsId(String group);
+  List<Long> getContactsId(String group);
 }
