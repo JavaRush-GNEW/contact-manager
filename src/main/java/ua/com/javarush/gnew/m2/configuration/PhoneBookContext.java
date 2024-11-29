@@ -46,6 +46,7 @@ public class PhoneBookContext {
     addBean(SearchContact.class, new SearchContact());
     addBean(SetLocale.class, new SetLocale());
     addBean(SetUser.class, new SetUser());
+    addBean(GroupContact.class, new GroupContact());
 
     try {
       MocTesterPhoneBook.createTester();

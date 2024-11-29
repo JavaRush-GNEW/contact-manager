@@ -55,7 +55,7 @@ phonebook --user/-u [-hV] [<name>]
 #### Example
 
 ```shell
-java -jar phonebook.jar -u alex
+java -jar target/contact-manager.jar -u tester
 ```
 
 ```
@@ -76,7 +76,7 @@ phonebook --list/-ls [-hV]
 #### Example
 
 ```shell
-java -jar phonebook.jar -ls
+java -jar target/contact-manager.jar -ls
 ```
 
 ```
@@ -109,7 +109,7 @@ phonebook --add/-a [-hV] -n=<name> -e[=<emails> [<emails> [<emails>]]] [-e
 #### Example
 
 ```shell
-java -jar phonebook.jar -a -n "Jhon Snow" -p 123456789 22233333 -e 123@qq.ua 234@qq.ua -g JhonOnGit 
+java -jar target/contact-manager.jar -a -n "Jhon Snow" -p 123456789 22233333 -e 123@qq.ua 234@qq.ua -g JhonOnGit 
 ```
 
 ### Search
@@ -127,7 +127,7 @@ phonebook --search/-s [-hV] [<name>]
 #### Example
 
 ```shell
-java -jar phonebook.jar -s Chris
+java -jar target/contact-manager.jar -s Chris
 ```
 
 ```
@@ -151,7 +151,7 @@ phonebook --edit/-e [-hV] [<id>]
 #### Example
 
 ```shell
-java -jar phonebook.jar -e 2222
+java -jar target/contact-manager.jar -e 2222
 ```
 
 ```
@@ -189,7 +189,7 @@ phonebook --delete/-d [-hV] [<id>]
 #### Example
 
 ```shell
-java -jar phonebook.jar -d 12341 12342
+java -jar target/contact-manager.jar -d 12341 12342
 ```
 
 ```
@@ -217,14 +217,32 @@ phonebook --group/-gr [-hV]
 #### Example
 
 ```shell
-java -jar phonebook.jar -gr -c "Marvel"
-java -jar phonebook.jar -gr -a "Marvel" 12340 12343 
+java -jar target/contact-manager.jar -gr -c "Marvel"
+java -jar target/contact-manager.jar -gr -a "Marvel" 1614 5759 
 
 ```
 
 ```
-Контакт видалено:
+| 1614       | Scarlett Johansson   | ScarlettJohGit  | +380675555555, +380676666666   | Scarlett.j@m.ua, Scarlett.j@gmail.com        | 
+| 5759       | Jeremy Renner        | JeremyRenGit    | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com            | 
+```
+
+```shell
+java -jar target/contact-manager.jar -gr
+
+```
+
+```
+### Marvel Studio###
 | ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
-| 12340      | Chris Hemsworth      | Hemsworth-C     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              | 
-| 12343      | Jeremy Renner        |                 | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com 
-```
+| 3686       | Chris Pratt          | ChrisPraGit     | +380673333333, +380674444444   | chris.p@m.ua, chris.p@gmail.com              | 
+| 3805       | Chris Hemsworth      | ChrisHemGit     | +380671111111, +380672222222   | chris.h@m.ua, chris.h@gmail.com              | 
+
+### Github Team###
+| ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
+| 3686       | Chris Pratt          | ChrisPraGit     | +380673333333, +380674444444   | chris.p@m.ua, chris.p@gmail.com              | 
+
+### Marvel###
+| ID         | FULL NAME            | GITHUB ID       | PHONE                          | EMAIL                                        | 
+| 1614       | Scarlett Johansson   | ScarlettJohGit  | +380675555555, +380676666666   | Scarlett.j@m.ua, Scarlett.j@gmail.com        | 
+| 5759       | Jeremy Renner        | JeremyRenGit    | +380677777777, +380678888888   | Jeremy.r@m.ua, Jeremy.r@gmail.com            | ```
