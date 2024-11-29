@@ -13,8 +13,7 @@ public class SimplePhoneBook implements PhoneBookInterface {
 
   @Override
   public ContactDto add(ContactDto contactDto) throws IOException {
-    contactDtoRepository.save(contactDto);
-    return contactDto;
+    return contactDtoRepository.save(contactDto);
   }
 
   @Override
