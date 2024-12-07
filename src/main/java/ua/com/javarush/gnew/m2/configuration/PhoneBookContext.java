@@ -55,7 +55,7 @@ public class PhoneBookContext {
     }
   }
 
-  private static void addBean(Class clazz, Object object) {
+  public static void addBean(Class clazz, Object object) {
     context.put(clazz, object);
   }
 

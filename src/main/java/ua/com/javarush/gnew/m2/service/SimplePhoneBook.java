@@ -3,10 +3,12 @@ package ua.com.javarush.gnew.m2.service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import lombok.Data;
 import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.repository.ContactDtoRepository;
 
+@Data
 public class SimplePhoneBook implements PhoneBookInterface {
 
   ContactDtoRepository contactDtoRepository = PhoneBookContext.getBean(ContactDtoRepository.class);
