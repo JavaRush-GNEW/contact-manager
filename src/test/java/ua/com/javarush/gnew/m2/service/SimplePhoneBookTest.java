@@ -20,7 +20,6 @@ import ua.com.javarush.gnew.m2.repository.ContactDtoRepository;
 @ExtendWith(MockitoExtension.class)
 class SimplePhoneBookTest {
   @Mock ContactDtoRepository contactDtoRepository;
-
   PhoneBookInterface phoneBook;
   ContactDto contact =
       new ContactDto(
@@ -34,9 +33,7 @@ class SimplePhoneBookTest {
     try (MockedStatic<PhoneBookContext> phone = Mockito.mockStatic(PhoneBookContext.class)) {
       phone
           .when(
-              () -> {
-                PhoneBookContext.getBean(ContactDtoRepository.class);
-              })
+              () -> PhoneBookContext.getBean(ContactDtoRepository.class))
           .thenReturn(contactDtoRepository);
       phoneBook = new SimplePhoneBook();
     }
