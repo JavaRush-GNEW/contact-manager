@@ -28,6 +28,7 @@ class SimplePhoneBookTest {
           List.of("chris.h@m.ua", "chris.h@gmail.com"),
           "ChrisHemGit");
 
+
   @BeforeEach
   void beforeEach() {
     try (MockedStatic<PhoneBookContext> phone = Mockito.mockStatic(PhoneBookContext.class)) {
