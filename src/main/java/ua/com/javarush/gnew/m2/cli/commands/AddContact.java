@@ -16,9 +16,13 @@ import ua.com.javarush.gnew.m2.utils.Utils;
     aliases = {"-a", "--add"},
     description = "Додає новий контакт до телефонної книги",
     mixinStandardHelpOptions = true)
+
 public class AddContact implements CliCommand {
+
+
   private final PhoneBookInterface phoneBookInterface =
-      PhoneBookContext.getBean(PhoneBookInterface.class);
+          PhoneBookContext.getBean(PhoneBookInterface.class);
+
 
   @Option(
       names = {"-n", "--name"},
