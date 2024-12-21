@@ -6,7 +6,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import picocli.CommandLine;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
-import ua.com.javarush.gnew.m2.utils.Utils;
 
 import java.io.IOException;
 import java.util.List;

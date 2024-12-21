@@ -18,18 +18,16 @@ import static org.mockito.Mockito.*;
 class AddContactTest {
 
     @Mock
-    private PhoneBookInterface phoneBookInterface; // Мокаем зависимость
+    private PhoneBookInterface phoneBookInterface;
 
-    private AddContact addContact; // Создаём тестируемый объект
+    private AddContact addContact;
 
     @BeforeEach
     void setUp() throws Exception {
-        MockitoAnnotations.openMocks(this); // Инициализируем моки
+        MockitoAnnotations.openMocks(this);
 
-        // Создаём новый экземпляр AddContact
         addContact = new AddContact();
 
-        // Используем Reflection для замены значения phoneBookInterface
         Field phoneBookInterfaceField = AddContact.class.getDeclaredField("phoneBookInterface");
         phoneBookInterfaceField.setAccessible(true);
         phoneBookInterfaceField.set(addContact, phoneBookInterface);
