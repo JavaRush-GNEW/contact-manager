@@ -11,7 +11,12 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
+
 
 class DeleteContactTest {
 
@@ -31,7 +36,7 @@ class DeleteContactTest {
     }
 
     @Test
-    void testCall_successfulDeletion() throws Exception {
+    void testCallSuccessfulDeletion() throws Exception {
 
         doNothing().when(phoneBookInterface).delete(anyLong());
         when(phoneBookInterface.list()).thenReturn(List.of());
@@ -51,7 +56,7 @@ class DeleteContactTest {
     }
 
     @Test
-    void testCall_deletionWithException() throws Exception {
+    void testCallDeletionWithException() throws Exception {
 
         doNothing().when(phoneBookInterface).delete(123L);
         doThrow(new IOException("Ошибка удаления")).when(phoneBookInterface).delete(456L);

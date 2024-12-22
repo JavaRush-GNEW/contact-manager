@@ -13,7 +13,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
+
 
 class AddContactTest {
 
@@ -34,7 +37,7 @@ class AddContactTest {
     }
 
     @Test
-    void testCall_addContactSuccessfully() throws Exception {
+    void testCallAddContactSuccessfully() throws Exception {
 
         ContactDto savedContact = new ContactDto("Иван Иванов", List.of("123456789"), List.of("ivan@example.com"), "ivanGitHub");
         when(phoneBookInterface.add(any(ContactDto.class))).thenReturn(savedContact);
@@ -55,7 +58,7 @@ class AddContactTest {
     }
 
     @Test
-    void testCall_withException() throws Exception {
+    void testCallWithException() throws Exception {
 
         when(phoneBookInterface.add(any(ContactDto.class))).thenThrow(new RuntimeException("Ошибка добавления"));
 
