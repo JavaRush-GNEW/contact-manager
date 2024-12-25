@@ -29,21 +29,29 @@ class EditContactTest {
 
     private EditContactMenu editContactMenu;
 
+    private boolean skipBeforeEach = false;
+
 
     @BeforeEach
     void setUp() {
+        if (skipBeforeEach) {
+            return;
+        }
         phoneBookInterface = mock(PhoneBookInterface.class);
         editContactMenu = mock(EditContactMenu.class);
-    }
-
-    @Test
-    void testEditContactSuccessfulScenario() throws IOException {
-
         try (MockedStatic<PhoneBookContext> mockedStatic = mockStatic(PhoneBookContext.class)) {
             mockedStatic.when(() -> PhoneBookContext.getBean(PhoneBookInterface.class))
                     .thenReturn(phoneBookInterface);
             mockedStatic.when(() -> PhoneBookContext.getBean(EditContactMenu.class))
                     .thenReturn(editContactMenu);
+        }
+
+    }
+
+    @Test
+    void testEditContactSuccessfulScenario() throws IOException {
+
+        skipBeforeEach = false;
 
             ContactDto mockContact = new ContactDto();
             mockContact.setId(1L);
@@ -66,11 +74,13 @@ class EditContactTest {
             assertEquals(0, result);
             verify(phoneBookInterface, times(1)).getById(1L);
             verify(editContactMenu, never()).setContact(any(ContactDto.class));
-        }
+
     }
 
     @Test
     void testEditContactNotFound() throws IOException {
+
+        skipBeforeEach = true;
 
         try (MockedStatic<PhoneBookContext> mockedStatic = mockStatic(PhoneBookContext.class)) {
             mockedStatic.when(() -> PhoneBookContext.getBean(PhoneBookInterface.class))
@@ -98,11 +108,7 @@ class EditContactTest {
     @Test
     void testEditContactValidEdit() throws IOException {
 
-        try (MockedStatic<PhoneBookContext> mockedStatic = mockStatic(PhoneBookContext.class)) {
-            mockedStatic.when(() -> PhoneBookContext.getBean(PhoneBookInterface.class))
-                    .thenReturn(phoneBookInterface);
-            mockedStatic.when(() -> PhoneBookContext.getBean(EditContactMenu.class))
-                    .thenReturn(editContactMenu);
+        skipBeforeEach = false;
 
             ContactDto mockContact = new ContactDto();
             mockContact.setId(1L);
@@ -127,6 +133,6 @@ class EditContactTest {
             verify(phoneBookInterface, times(1)).getById(1L);
 
             verify(editContactMenu, times(1)).setContact(mockContact);
-        }
+
     }
 }
