@@ -26,7 +26,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EditContactTest {
 
     private PhoneBookInterface phoneBookInterface;
+
     private EditContactMenu editContactMenu;
+
 
     @BeforeEach
     void setUp() {
@@ -66,6 +68,7 @@ class EditContactTest {
             verify(editContactMenu, never()).setContact(any(ContactDto.class));
         }
     }
+
     @Test
     void testEditContactNotFound() throws IOException {
 
@@ -91,6 +94,7 @@ class EditContactTest {
             verifyNoInteractions(editContactMenu);
         }
     }
+
     @Test
     void testEditContactValidEdit() throws IOException {
 
