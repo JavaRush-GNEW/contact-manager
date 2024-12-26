@@ -23,7 +23,7 @@ class EditContactMenuTest {
     void setUp() {
 
         phoneBookInterface = mock(PhoneBookInterface.class);
-        editContactMenu = mock(EditContactMenu.class);
+
     }
 
     @Test
@@ -31,6 +31,8 @@ class EditContactMenuTest {
         try (MockedStatic<PhoneBookContext> mockedStatic = mockStatic(PhoneBookContext.class)) {
             mockedStatic.when(() -> PhoneBookContext.getBean(PhoneBookInterface.class))
                     .thenReturn(phoneBookInterface);
+
+            editContactMenu = new EditContactMenu();
 
             ContactDto contact = new ContactDto();
             contact.setId(1L);
