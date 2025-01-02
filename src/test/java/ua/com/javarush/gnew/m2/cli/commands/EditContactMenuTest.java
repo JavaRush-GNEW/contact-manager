@@ -15,6 +15,7 @@ import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 
 class EditContactMenuTest {
 
+
     @ParameterizedTest
     @CsvSource({"1, New Name", "2, 987654321", "3, new.email@example.com", "4, newGithubID", "5, invalid"})
     void testEditContactMenuValidAndInvalidInput(String userChoice, String userInput) throws IOException {
@@ -51,23 +52,36 @@ class EditContactMenuTest {
 
             ContactDto updatedContact = editContactMenu.getContact();
 
-            if (userChoice.equals("1") && userInput.equals("New Name")) {
-                    assertEquals("New Name", updatedContact.getFullName());
+            String ONE = "1";
+            String TWO = "2";
+            String THREE = "3";
+            String FOUR = "4";
+            String FIVE = "5";
+
+            String expectedName = "New Name";
+            String expectedPhone = "987654321";
+            String expectedEmail = "new.email@example.com";
+            String expectedGitHubID = "newGitHubID";
+            String expectedInput = "invalid";
+
+
+            if (userChoice.equals(ONE) && userInput.equals(expectedName)) {
+                    assertEquals(expectedName, updatedContact.getFullName());
                     verify(phoneBookInterface, times(1)).edit(updatedContact);
 
-            } else if (userChoice.equals("2") && userInput.equals("987654321")) {
-                assertEquals(List.of("987654321"), updatedContact.getPhones());
+            } else if (userChoice.equals(TWO) && userInput.equals(expectedPhone)) {
+                assertEquals(List.of(expectedPhone), updatedContact.getPhones());
                 verify(phoneBookInterface, times(1)).edit(updatedContact);
 
-            } else if (userChoice.equals("3") && userInput.equals("new.email@example.com")) {
-                assertEquals(List.of("new.email@example.com"), updatedContact.getEmails());
+            } else if (userChoice.equals(THREE) && userInput.equals(expectedEmail)) {
+                assertEquals(List.of(expectedEmail), updatedContact.getEmails());
                 verify(phoneBookInterface, times(1)).edit(updatedContact);
 
-            } else if (userChoice.equals("4") && userInput.equals("newGithubID")) {
-                assertEquals("newGithubID", updatedContact.getGithubId());
+            } else if (userChoice.equals(FOUR) && userInput.equals(expectedGitHubID)) {
+                assertEquals(expectedGitHubID, updatedContact.getGithubId());
                 verify(phoneBookInterface, times(1)).edit(updatedContact);
 
-            } else if (userChoice.equals("5") && userInput.equals("invalid")) {
+            } else if (userChoice.equals(FIVE) && userInput.equals(expectedInput)) {
                 verifyNoInteractions(phoneBookInterface);
             }
             
