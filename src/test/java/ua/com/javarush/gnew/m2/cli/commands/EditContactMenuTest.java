@@ -13,23 +13,20 @@ import ua.com.javarush.gnew.m2.configuration.PhoneBookContext;
 import ua.com.javarush.gnew.m2.dto.ContactDto;
 import ua.com.javarush.gnew.m2.service.PhoneBookInterface;
 
-
 class EditContactMenuTest {
-
-    private PhoneBookInterface phoneBookInterface;
-    private EditContactMenu editContactMenu;
 
     @ParameterizedTest
     @CsvSource({"1, New Name", "2, 987654321", "3, new.email@example.com", "4, newGithubID", "5, invalid"})
-    void testEditContactMenuEdit(String userChoice, String userInput) throws IOException {
+    void testEditContactMenuValidAndInvalidInput(String userChoice, String userInput) throws IOException {
 
-        phoneBookInterface = mock(PhoneBookInterface.class);
+
+       PhoneBookInterface phoneBookInterface = mock(PhoneBookInterface.class);
+
+        EditContactMenu editContactMenu = new EditContactMenu();
 
         try (MockedStatic<PhoneBookContext> mockedStatic = mockStatic(PhoneBookContext.class)) {
             mockedStatic.when(() -> PhoneBookContext.getBean(PhoneBookInterface.class))
                     .thenReturn(phoneBookInterface);
-
-            editContactMenu = new EditContactMenu();
 
             ContactDto contact = new ContactDto();
             contact.setId(1L);
@@ -71,8 +68,7 @@ class EditContactMenuTest {
             } else if (userChoice.equals("5") && userInput.equals("invalid")) {
                 verifyNoInteractions(phoneBookInterface);
             }
-
-
+            
         }
     }
 
