@@ -32,8 +32,7 @@ class SimplePhoneBookTest {
   void beforeEach() {
     try (MockedStatic<PhoneBookContext> phone = Mockito.mockStatic(PhoneBookContext.class)) {
       phone
-          .when(
-              () -> PhoneBookContext.getBean(ContactDtoRepository.class))
+          .when(() -> PhoneBookContext.getBean(ContactDtoRepository.class))
           .thenReturn(contactDtoRepository);
       phoneBook = new SimplePhoneBook();
     }
