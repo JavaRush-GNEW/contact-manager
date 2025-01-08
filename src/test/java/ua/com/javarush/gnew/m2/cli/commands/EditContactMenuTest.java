@@ -20,10 +20,7 @@ class EditContactMenuTest {
     @CsvSource({"1, New Name", "2, 987654321", "3, new.email@example.com", "4, newGithubID", "5, invalid"})
     void testEditContactMenuValidAndInvalidInput(String userChoice, String userInput) throws IOException {
 
-
        PhoneBookInterface phoneBookInterface = mock(PhoneBookInterface.class);
-
-
 
         try (MockedStatic<PhoneBookContext> mockedStatic = mockStatic(PhoneBookContext.class)) {
             mockedStatic.when(() -> PhoneBookContext.getBean(PhoneBookInterface.class))
